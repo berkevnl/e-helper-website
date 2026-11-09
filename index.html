@@ -272,11 +272,11 @@
             <!-- RGB Dropdown & Color Trigger -->
             <div class="app-select-row">
               <select class="app-select" id="cmbLedMode" aria-label="Klavye Işıklandırma Modu">
-                <option value="TripleZone">🎨 3-Bölge Özel</option>
-                <option value="Static">✨ Sabit Renk</option>
-                <option value="Breathing">💨 Nefes Alma</option>
-                <option value="ColorfulCycle">💫 Dinamik Döngü</option>
-                <option value="Rainbow">🌈 Gökkuşağı</option>
+                <option value="TripleZone" data-i18n="optTripleZone">🎨 3-Bölge Özel</option>
+                <option value="Static" data-i18n="optStatic">✨ Sabit Renk</option>
+                <option value="Breathing" data-i18n="optBreathing">💨 Nefes Alma</option>
+                <option value="ColorfulCycle" data-i18n="optColorfulCycle">💫 Dinamik Döngü</option>
+                <option value="Rainbow" data-i18n="optRainbow">🌈 Gökkuşağı</option>
               </select>
 
               <button type="button" class="app-color-trigger" id="btnModeColorAction" title="Rengi Değiştir">
@@ -317,8 +317,8 @@
                   <span data-i18n="chassisHeader">Casper Excalibur Klavye & Fan Tepkisi</span>
                 </div>
                 <div class="chassis-telemetry-readout">
-                  <span class="readout-item">Mod: <strong id="readoutMode">Dengeli (Gaming)</strong></span>
-                  <span class="readout-item">Güç: <strong id="readoutWatts">75W TDP</strong></span>
+                  <span class="readout-item"><span data-i18n="lblMode">Mod:</span> <strong id="readoutMode">Dengeli (Gaming)</strong></span>
+                  <span class="readout-item"><span data-i18n="lblPower">Güç:</span> <strong id="readoutWatts">75W TDP</strong></span>
                 </div>
               </div>
 
@@ -328,40 +328,40 @@
                   <!-- Left Zone (WASD) -->
                   <div class="deck-zone" id="deckZoneLeft">
                     <div class="deck-zone-title">
-                      <span>Bölge 1: WASD</span>
+                      <span data-i18n="deckZone1Title">Bölge 1: WASD</span>
                     </div>
                     <div class="deck-key-matrix">
                       <div class="matrix-key"></div><div class="matrix-key"></div><div class="matrix-key"></div><div class="matrix-key"></div>
                       <div class="matrix-key"></div><div class="matrix-key"></div><div class="matrix-key"></div><div class="matrix-key"></div>
                       <div class="matrix-key"></div><div class="matrix-key"></div><div class="matrix-key"></div><div class="matrix-key"></div>
                     </div>
-                    <span>WASD & Sayılar</span>
+                    <span data-i18n="deckZone1Sub">WASD & Sayılar</span>
                   </div>
 
                   <!-- Center Zone (Typing & Arrows) -->
                   <div class="deck-zone" id="deckZoneMid">
                     <div class="deck-zone-title">
-                      <span>Bölge 2: Orta</span>
+                      <span data-i18n="deckZone2Title">Bölge 2: Orta</span>
                     </div>
                     <div class="deck-key-matrix">
                       <div class="matrix-key"></div><div class="matrix-key"></div><div class="matrix-key"></div><div class="matrix-key"></div>
                       <div class="matrix-key"></div><div class="matrix-key"></div><div class="matrix-key"></div><div class="matrix-key"></div>
                       <div class="matrix-key"></div><div class="matrix-key"></div><div class="matrix-key"></div><div class="matrix-key"></div>
                     </div>
-                    <span>Yazı & Boşluk</span>
+                    <span data-i18n="deckZone2Sub">Yazı & Boşluk</span>
                   </div>
 
                   <!-- Right Zone (Numpad) -->
                   <div class="deck-zone" id="deckZoneRight">
                     <div class="deck-zone-title">
-                      <span>Bölge 3: Numpad</span>
+                      <span data-i18n="deckZone3Title">Bölge 3: Numpad</span>
                     </div>
                     <div class="deck-key-matrix">
                       <div class="matrix-key"></div><div class="matrix-key"></div><div class="matrix-key"></div>
                       <div class="matrix-key"></div><div class="matrix-key"></div><div class="matrix-key"></div>
                       <div class="matrix-key"></div><div class="matrix-key"></div><div class="matrix-key"></div>
                     </div>
-                    <span>Numpad</span>
+                    <span data-i18n="deckZone3Sub">Numpad</span>
                   </div>
                 </div>
               </div>
@@ -433,107 +433,107 @@
             </thead>
             <tbody>
               <tr>
-                <td><strong>RAM Bellek Tüketimi</strong></td>
+                <td><strong data-i18n="compRowRam">RAM Bellek Tüketimi</strong></td>
                 <td>
                   <span class="badge-tag-good">
                     <svg class="icon icon-sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    ~1 - 10 MB (Arka Planda) / ~40 - 50 MB (Aktif Ekranda)
+                    <span data-i18n="compEhRam">~1 - 10 MB (Arka Planda) / ~40 - 50 MB (Aktif Ekranda)</span>
                   </span>
                 </td>
                 <td>
                   <span class="badge-tag-bad">
                     <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                    ~180 - 350+ MB (Sürekli Arka Plan)
+                    <span data-i18n="compOffRam">~180 - 350+ MB (Sürekli Arka Plan)</span>
                   </span>
                 </td>
               </tr>
               <tr>
-                <td><strong>Arka Plan Windows Servisleri</strong></td>
+                <td><strong data-i18n="compRowSvc">Arka Plan Windows Servisleri</strong></td>
                 <td>
                   <span class="badge-tag-good">
                     <svg class="icon icon-sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    0 Servis (Sıfır sistem yükü)
+                    <span data-i18n="compEhSvc">0 Servis (Sıfır sistem yükü)</span>
                   </span>
                 </td>
                 <td>
                   <span class="badge-tag-bad">
                     <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                    2 - 4 Adet Sürekli Çalışan Servis
+                    <span data-i18n="compOffSvc">2 - 4 Adet Sürekli Çalışan Servis</span>
                   </span>
                 </td>
               </tr>
               <tr>
-                <td><strong>Açılış Hızı & UAC Onayı</strong></td>
+                <td><strong data-i18n="compRowStart">Açılış Hızı & UAC Onayı</strong></td>
                 <td>
                   <span class="badge-tag-good">
                     <svg class="icon icon-sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    Anında (&lt;0.2 sn), Görev Zamanlayıcısı ile UAC'siz
+                    <span data-i18n="compEhStart">Anında (&lt;0.2 sn), Görev Zamanlayıcısı ile UAC'siz</span>
                   </span>
                 </td>
                 <td>
                   <span class="badge-tag-bad">
                     <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                    10 - 25 sn gecikmeli Windows başlangıcı
+                    <span data-i18n="compOffStart">10 - 25 sn gecikmeli Windows başlangıcı</span>
                   </span>
                 </td>
               </tr>
               <tr>
-                <td><strong>Yeniden Başlatmada Ayar Kalıcılığı</strong></td>
+                <td><strong data-i18n="compRowPersist">Yeniden Başlatmada Ayar Kalıcılığı</strong></td>
                 <td>
                   <span class="badge-tag-good">
                     <svg class="icon icon-sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    Tam Kalıcı (EC Firmware Senkronizasyonu)
+                    <span data-i18n="compEhPersist">Tam Kalıcı (EC Firmware Senkronizasyonu)</span>
                   </span>
                 </td>
                 <td>
                   <span class="badge-tag-bad">
                     <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                    Kararsız (Yeniden başlatmada sıfırlanma)
+                    <span data-i18n="compOffPersist">Kararsız (Yeniden başlatmada sıfırlanma)</span>
                   </span>
                 </td>
               </tr>
               <tr>
-                <td><strong>Gerçek Dosya Boyutu</strong></td>
+                <td><strong data-i18n="compRowSize">Gerçek Dosya Boyutu</strong></td>
                 <td>
                   <span class="badge-tag-good">
                     <svg class="icon icon-sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    ~65 MB Tek Dosya (.exe, Kurulumsuz)
+                    <span data-i18n="compEhSize">~65 MB Tek Dosya (.exe, Kurulumsuz)</span>
                   </span>
                 </td>
                 <td>
                   <span class="badge-tag-bad">
                     <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                    ~200 - 350 MB Setup Yükleyici Paketi
+                    <span data-i18n="compOffSize">~200 - 350 MB Setup Yükleyici Paketi</span>
                   </span>
                 </td>
               </tr>
               <tr>
-                <td><strong>Veri Gizliliği & Telemetri</strong></td>
+                <td><strong data-i18n="compRowPrivacy">Veri Gizliliği & Telemetri</strong></td>
                 <td>
                   <span class="badge-tag-good">
                     <svg class="icon icon-sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    Sıfır Telemetri (Tamamen yerel & çevrimdışı)
+                    <span data-i18n="compEhPrivacy">Sıfır Telemetri (Tamamen yerel & çevrimdışı)</span>
                   </span>
                 </td>
                 <td>
                   <span class="badge-tag-bad">
                     <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                    Sürekli Arka Plan Tanılama ve Loglama
+                    <span data-i18n="compOffPrivacy">Sürekli Arka Plan Tanılama ve Loglama</span>
                   </span>
                 </td>
               </tr>
               <tr>
-                <td><strong>Lisans & Topluluk Desteği</strong></td>
+                <td><strong data-i18n="compRowLicense">Lisans & Topluluk Desteği</strong></td>
                 <td>
                   <span class="badge-tag-good">
                     <svg class="icon icon-sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    GPL-3.0 (Açık Kaynak, Şeffaf)
+                    <span data-i18n="compEhLicense">GPL-3.0 (Açık Kaynak, Şeffaf)</span>
                   </span>
                 </td>
                 <td>
                   <span class="badge-tag-bad">
                     <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                    Kapalı Kaynak, Kısıtlı Güncelleme Döngüsü
+                    <span data-i18n="compOffLicense">Kapalı Kaynak, Kısıtlı Güncelleme Döngüsü</span>
                   </span>
                 </td>
               </tr>
@@ -562,8 +562,8 @@
             <div class="feature-icon-wrapper">
               <svg class="icon icon-lg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
             </div>
-            <h3>3 Performans Modu</h3>
-            <p>
+            <h3 data-i18n="featCard1Title">3 Performans Modu</h3>
+            <p data-i18n="featCard1Desc">
               Tasarruf, Dengeli ve Performans profilleri arasında tek tıkla geçiş yapın. Windows yerel güç planlarıyla otomatik senkronize çalışır.
             </p>
           </div>
@@ -573,8 +573,8 @@
             <div class="feature-icon-wrapper">
               <svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg>
             </div>
-            <h3>Canlı Sıcaklık & Fan İzleme</h3>
-            <p>
+            <h3 data-i18n="featCard2Title">Canlı Sıcaklık & Fan İzleme</h3>
+            <p data-i18n="featCard2Desc">
               İşlemci ve ekran kartı sıcaklıklarını ve bağımsız fan devirlerini (RPM) sistem tepsisi üzerinden anlık olarak takip edin.
             </p>
           </div>
@@ -584,8 +584,8 @@
             <div class="feature-icon-wrapper">
               <svg class="icon icon-lg" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M8 16h8"></path></svg>
             </div>
-            <h3>3-Bölge RGB Klavye</h3>
-            <p>
+            <h3 data-i18n="featCard3Title">3-Bölge RGB Klavye</h3>
+            <p data-i18n="featCard3Desc">
               WASD, Orta ve Numpad bölgelerine bağımsız renkler atayın. Sabit, nefes alma, gökkuşağı veya dinamik modları tek tıkla seçin.
             </p>
           </div>
@@ -595,8 +595,8 @@
             <div class="feature-icon-wrapper">
               <svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
             </div>
-            <h3>Kalıcı Ayar Korunumu</h3>
-            <p>
+            <h3 data-i18n="featCard4Title">Kalıcı Ayar Korunumu</h3>
+            <p data-i18n="featCard4Desc">
               Bilgisayar yeniden başlatıldığında klavye renkleri ve fan modunuz kaybolmaz; anakart EC denetleyicisi ile otomatik eşitlenir.
             </p>
           </div>
@@ -606,8 +606,8 @@
             <div class="feature-icon-wrapper">
               <svg class="icon icon-lg" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
             </div>
-            <h3>UAC'siz Otomatik Başlangıç</h3>
-            <p>
+            <h3 data-i18n="featCard5Title">UAC'siz Otomatik Başlangıç</h3>
+            <p data-i18n="featCard5Desc">
               Windows Görev Zamanlayıcısı entegrasyonu sayesinde açılışta onay uyarısı vermeden sistem tepsisine sessizce yerleşir.
             </p>
           </div>
@@ -617,8 +617,8 @@
             <div class="feature-icon-wrapper">
               <svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.19"></path></svg>
             </div>
-            <h3>Dahili Güncelleyici</h3>
-            <p>
+            <h3 data-i18n="featCard6Title">Dahili Güncelleyici</h3>
+            <p data-i18n="featCard6Desc">
               v1.1.1 ile gelen entegre güncelleme motoru yeni sürümleri GitHub API üzerinden denetler ve tek tıkla kendini günceller.
             </p>
           </div>
@@ -642,26 +642,26 @@
         <div class="steps-grid">
           <div class="step-card">
             <div class="step-number">01</div>
-            <div class="step-badge">1. İndir</div>
-            <h3>E-Helper.exe'yi Edinin</h3>
-            <p>Releases sayfasından son sürümü bilgisayarınıza indirin. Herhangi bir kurulum sihirbazı veya ekstra paket gerekmez.</p>
-            <div class="step-tip">Sadece ~65 MB tek dosya halinde çalışır.</div>
+            <div class="step-badge" data-i18n="step1Badge">1. İndir</div>
+            <h3 data-i18n="step1Title">E-Helper.exe'yi Edinin</h3>
+            <p data-i18n="step1Desc">Releases sayfasından son sürümü bilgisayarınıza indirin. Herhangi bir kurulum sihirbazı veya ekstra paket gerekmez.</p>
+            <div class="step-tip" data-i18n="step1Tip">Sadece ~65 MB tek dosya halinde çalışır.</div>
           </div>
 
           <div class="step-card">
             <div class="step-number">02</div>
-            <div class="step-badge">2. Çalıştır</div>
-            <h3>Yönetici Olarak Açın</h3>
-            <p>Dosyaya sağ tıklayıp "Yönetici Olarak Çalıştır" deyin. Excalibur ACPI anakart denetleyicisine erişim için bu izin zorunludur.</p>
-            <div class="step-tip">Güvenli ve şeffaf ACPI WMI/SMI erişimi.</div>
+            <div class="step-badge" data-i18n="step2Badge">2. Çalıştır</div>
+            <h3 data-i18n="step2Title">Yönetici Olarak Açın</h3>
+            <p data-i18n="step2Desc">Dosyaya sağ tıklayıp "Yönetici Olarak Çalıştır" deyin. Excalibur ACPI anakart denetleyicisine erişim için bu izin zorunludur.</p>
+            <div class="step-tip" data-i18n="step2Tip">Güvenli ve şeffaf ACPI WMI/SMI erişimi.</div>
           </div>
 
           <div class="step-card">
             <div class="step-number">03</div>
-            <div class="step-badge">3. Yönet</div>
-            <h3>Sistem Tepsisinden Kontrol Edin</h3>
-            <p>Saatin yanındaki simgeye tıklayarak paneli açın, fan ve RGB ayarlarınızı anında yapın. İsterseniz başlangıca ekleyin.</p>
-            <div class="step-tip">"Başlangıçta Çalıştır" kutucuğunu işaretleyin.</div>
+            <div class="step-badge" data-i18n="step3Badge">3. Yönet</div>
+            <h3 data-i18n="step3Title">Sistem Tepsisinden Kontrol Edin</h3>
+            <p data-i18n="step3Desc">Saatin yanındaki simgeye tıklayarak paneli açın, fan ve RGB ayarlarınızı anında yapın. İsterseniz başlangıca ekleyin.</p>
+            <div class="step-tip" data-i18n="step3Tip">"Başlangıçta Çalıştır" kutucuğunu işaretleyin.</div>
           </div>
         </div>
       </div>
@@ -684,35 +684,35 @@
           <div class="hardware-models-grid">
             <div class="model-chip">
               <span class="model-name">Excalibur G770</span>
-              <span class="model-status-pill verified">Doğrulandı</span>
+              <span class="model-status-pill verified" data-i18n="hwVerified">Doğrulandı</span>
             </div>
             <div class="model-chip">
               <span class="model-name">Excalibur G850</span>
-              <span class="model-status-pill verified">Doğrulandı</span>
+              <span class="model-status-pill verified" data-i18n="hwVerified">Doğrulandı</span>
             </div>
             <div class="model-chip">
               <span class="model-name">Excalibur G860</span>
-              <span class="model-status-pill verified">Doğrulandı</span>
+              <span class="model-status-pill verified" data-i18n="hwVerified">Doğrulandı</span>
             </div>
             <div class="model-chip">
               <span class="model-name">Excalibur G870</span>
-              <span class="model-status-pill verified">Doğrulandı</span>
+              <span class="model-status-pill verified" data-i18n="hwVerified">Doğrulandı</span>
             </div>
             <div class="model-chip">
               <span class="model-name">Excalibur G911</span>
-              <span class="model-status-pill verified">Doğrulandı</span>
+              <span class="model-status-pill verified" data-i18n="hwVerified">Doğrulandı</span>
             </div>
             <div class="model-chip">
               <span class="model-name">Excalibur G780</span>
-              <span class="model-status-pill compatible">Uyumlu</span>
+              <span class="model-status-pill compatible" data-i18n="hwCompatible">Uyumlu</span>
             </div>
             <div class="model-chip">
               <span class="model-name">Excalibur G900</span>
-              <span class="model-status-pill compatible">Uyumlu</span>
+              <span class="model-status-pill compatible" data-i18n="hwCompatible">Uyumlu</span>
             </div>
             <div class="model-chip">
               <span class="model-name">Excalibur G920</span>
-              <span class="model-status-pill compatible">Uyumlu</span>
+              <span class="model-status-pill compatible" data-i18n="hwCompatible">Uyumlu</span>
             </div>
           </div>
         </div>
@@ -746,17 +746,17 @@
               <div class="version-card-header">
                 <div class="version-identity">
                   <span class="version-tag">v1.1.1</span>
-                  <span class="latest-pill">En Güncel</span>
+                  <span class="latest-pill" data-i18n="clLatestPill">En Güncel</span>
                 </div>
-                <span class="version-date">12 Ekim 2026</span>
+                <span class="version-date" data-i18n="clDate111">12 Ekim 2026</span>
               </div>
               <ul class="version-highlights">
-                <li><span class="highlight-bullet">•</span><span><strong>Otomatik Güncelleme:</strong> GitHub API üzerinden yeni sürümleri denetleme ve tek tıkla kesintisiz yeniden başlatarak güncelleme.</span></li>
-                <li><span class="highlight-bullet">•</span><span><strong>Yenilenen Alt Çubuk:</strong> Daha sade footer arayüzü ve sürüm etiketleri.</span></li>
-                <li><span class="highlight-bullet">•</span><span><strong>Bellek İyileştirmesi:</strong> Boşta bellek tüketimi 1-10 MB bandında optimize edildi.</span></li>
+                <li><span class="highlight-bullet">•</span><span data-i18n="cl111_1"><strong>Otomatik Güncelleme:</strong> GitHub API üzerinden yeni sürümleri denetleme ve tek tıkla kesintisiz yeniden başlatarak güncelleme.</span></li>
+                <li><span class="highlight-bullet">•</span><span data-i18n="cl111_2"><strong>Yenilenen Alt Çubuk:</strong> Daha sade footer arayüzü ve sürüm etiketleri.</span></li>
+                <li><span class="highlight-bullet">•</span><span data-i18n="cl111_3"><strong>Bellek İyileştirmesi:</strong> Boşta bellek tüketimi 1-10 MB bandında optimize edildi.</span></li>
               </ul>
               <a href="https://github.com/berkevnl/E-Helper/releases/tag/v1.1.1" target="_blank" rel="noopener noreferrer" class="version-download-btn">
-                <span>v1.1.1 Sürüm Detayları →</span>
+                <span data-i18n="clDetailsBtn111">v1.1.1 Sürüm Detayları →</span>
               </a>
             </div>
           </div>
@@ -769,16 +769,16 @@
                 <div class="version-identity">
                   <span class="version-tag">v1.1.0</span>
                 </div>
-                <span class="version-date">12 Ekim 2026</span>
+                <span class="version-date" data-i18n="clDate110">12 Ekim 2026</span>
               </div>
               <ul class="version-highlights">
-                <li><span class="highlight-bullet">•</span><span><strong>3-Bölge RGB Aydınlatma:</strong> Sol (WASD), Orta ve Sağ bölgeler için bağımsız renk ve mod tanımlama.</span></li>
-                <li><span class="highlight-bullet">•</span><span><strong>2D Renk Paleti:</strong> Windows 11 tarzı gelişmiş renk seçici ve Hex/RGB desteği.</span></li>
-                <li><span class="highlight-bullet">•</span><span><strong>Dolgulu Parlaklık:</strong> 3 kademeli (0, 1, 2) donanımsal parlaklık çubuğu.</span></li>
-                <li><span class="highlight-bullet">•</span><span><strong>SSD & RAM Telemetrisi:</strong> Bellek ve disk kullanımını gösteren canlı paneller.</span></li>
+                <li><span class="highlight-bullet">•</span><span data-i18n="cl110_1"><strong>3-Bölge RGB Aydınlatma:</strong> Sol (WASD), Orta ve Sağ bölgeler için bağımsız renk ve mod tanımlama.</span></li>
+                <li><span class="highlight-bullet">•</span><span data-i18n="cl110_2"><strong>2D Renk Paleti:</strong> Windows 11 tarzı gelişmiş renk seçici ve Hex/RGB desteği.</span></li>
+                <li><span class="highlight-bullet">•</span><span data-i18n="cl110_3"><strong>Dolgulu Parlaklık:</strong> 3 kademeli (0, 1, 2) donanımsal parlaklık çubuğu.</span></li>
+                <li><span class="highlight-bullet">•</span><span data-i18n="cl110_4"><strong>SSD & RAM Telemetrisi:</strong> Bellek ve disk kullanımını gösteren canlı paneller.</span></li>
               </ul>
               <a href="https://github.com/berkevnl/E-Helper/releases/tag/v1.1.0" target="_blank" rel="noopener noreferrer" class="version-download-btn">
-                <span>v1.1.0 Sürüm Detayları →</span>
+                <span data-i18n="clDetailsBtn110">v1.1.0 Sürüm Detayları →</span>
               </a>
             </div>
           </div>
@@ -791,14 +791,14 @@
                 <div class="version-identity">
                   <span class="version-tag">v1.0.1</span>
                 </div>
-                <span class="version-date">9 Ekim 2026</span>
+                <span class="version-date" data-i18n="clDate101">9 Ekim 2026</span>
               </div>
               <ul class="version-highlights">
-                <li><span class="highlight-bullet">•</span><span><strong>Başlangıç Yaması:</strong> Görev Zamanlayıcısı ile otomatik açılış uyumluluğu artırıldı.</span></li>
-                <li><span class="highlight-bullet">•</span><span><strong>UI Sürüm Etiketi:</strong> Sürüm numarası gösterimindeki uyumsuzluk düzeltildi.</span></li>
+                <li><span class="highlight-bullet">•</span><span data-i18n="cl101_1"><strong>Başlangıç Yaması:</strong> Görev Zamanlayıcısı ile otomatik açılış uyumluluğu artırıldı.</span></li>
+                <li><span class="highlight-bullet">•</span><span data-i18n="cl101_2"><strong>UI Sürüm Etiketi:</strong> Sürüm numarası gösterimindeki uyumsuzluk düzeltildi.</span></li>
               </ul>
               <a href="https://github.com/berkevnl/E-Helper/releases/tag/v1.0.1" target="_blank" rel="noopener noreferrer" class="version-download-btn">
-                <span>v1.0.1 Sürüm Detayları →</span>
+                <span data-i18n="clDetailsBtn101">v1.0.1 Sürüm Detayları →</span>
               </a>
             </div>
           </div>
@@ -811,15 +811,15 @@
                 <div class="version-identity">
                   <span class="version-tag">v1.0.0</span>
                 </div>
-                <span class="version-date">9 Ekim 2026</span>
+                <span class="version-date" data-i18n="clDate100">9 Ekim 2026</span>
               </div>
               <ul class="version-highlights">
-                <li><span class="highlight-bullet">•</span><span><strong>İlk Kararlı Sürüm:</strong> Casper Excalibur oyuncu bilgisayarları için bağımsız donanım yönetim aracı yayınlandı.</span></li>
-                <li><span class="highlight-bullet">•</span><span><strong>ACPI SMI Köprüsü:</strong> Üretici servislerine gerek kalmadan doğrudan anakartla iletişim.</span></li>
-                <li><span class="highlight-bullet">•</span><span><strong>Güç Modları:</strong> Tasarruf, Dengeli ve Performans profilleri.</span></li>
+                <li><span class="highlight-bullet">•</span><span data-i18n="cl100_1"><strong>İlk Kararlı Sürüm:</strong> Casper Excalibur oyuncu bilgisayarları için bağımsız donanım yönetim aracı yayınlandı.</span></li>
+                <li><span class="highlight-bullet">•</span><span data-i18n="cl100_2"><strong>ACPI SMI Köprüsü:</strong> Üretici servislerine gerek kalmadan doğrudan anakartla iletişim.</span></li>
+                <li><span class="highlight-bullet">•</span><span data-i18n="cl100_3"><strong>Güç Modları:</strong> Tasarruf, Dengeli ve Performans profilleri.</span></li>
               </ul>
               <a href="https://github.com/berkevnl/E-Helper/releases/tag/v1.0.0" target="_blank" rel="noopener noreferrer" class="version-download-btn">
-                <span>v1.0.0 Sürüm Detayları →</span>
+                <span data-i18n="clDetailsBtn100">v1.0.0 Sürüm Detayları →</span>
               </a>
             </div>
           </div>
@@ -833,36 +833,36 @@
     <section class="faq-section" id="faq">
       <div class="container">
         <div class="section-header">
-          <div class="section-badge">SSS</div>
-          <h2>Sıkça Sorulan Sorular</h2>
-          <p>E-Helper hakkında en çok merak edilen sorular.</p>
+          <div class="section-badge" data-i18n="faqBadge">SSS</div>
+          <h2 data-i18n="faqTitle">Sıkça Sorulan Sorular</h2>
+          <p data-i18n="faqSubtitle">E-Helper hakkında en çok merak edilen sorular.</p>
         </div>
 
         <div class="faq-grid">
           <div class="faq-item">
-            <h4>Resmi Excalibur Control Center'ı silmeli miyim?</h4>
-            <p>
+            <h4 data-i18n="faqQ1">Resmi Excalibur Control Center'ı silmeli miyim?</h4>
+            <p data-i18n="faqA1">
               Zorunlu değildir; ancak arka planda gereksiz servis çalışmasını önlemek ve maksimum RAM tasarrufu sağlamak için resmi yazılımın servislerini kapatmanız önerilir.
             </p>
           </div>
 
           <div class="faq-item">
-            <h4>Neden Yönetici Olarak Çalıştırılıyor?</h4>
-            <p>
+            <h4 data-i18n="faqQ2">Neden Yönetici Olarak Çalıştırılıyor?</h4>
+            <p data-i18n="faqA2">
               Windows'ta anakartın gömülü ACPI WMI/SMI denetleyicisine ve ekran kartı NVML donanım sensörlerine erişebilmek için standart olarak yönetici izni gereklidir.
             </p>
           </div>
 
           <div class="faq-item">
-            <h4>Bilgisayarımı garanti dışı bırakır mı?</h4>
-            <p>
+            <h4 data-i18n="faqQ3">Bilgisayarımı garanti dışı bırakır mı?</h4>
+            <p data-i18n="faqA3">
               Hayır. E-Helper tehlikeli bir hız aşırtma (overclock) veya BIOS yazma işlemi yapmaz; sadece anakartın standart fan ve ışık komutlarını tetikler.
             </p>
           </div>
 
           <div class="faq-item">
-            <h4>Diğer markalarda (Asus, Lenovo vb.) çalışır mı?</h4>
-            <p>
+            <h4 data-i18n="faqQ4">Diğer markalarda (Asus, Lenovo vb.) çalışır mı?</h4>
+            <p data-i18n="faqA4">
               Hayır. E-Helper yalnızca Casper Excalibur donanımına özeldir. Asus bilgisayarlar için G-Helper'ı tercih edebilirsiniz.
             </p>
           </div>
@@ -882,50 +882,50 @@
             <img src="assets/images/icon.png" alt="E-Helper" width="28" height="28" style="border-radius: 6px;">
             <h3 style="margin: 0; font-size: 1.15rem;">E-Helper</h3>
           </div>
-          <p>
+          <p data-i18n="footerDesc">
             Casper Excalibur dizüstü bilgisayarlar için açık kaynaklı, bağımsız ve ultra hafif kontrol merkezi.
           </p>
           <div style="display: flex; gap: 10px; margin-top: 12px;">
             <a href="https://github.com/berkevnl/E-Helper" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="min-height: 36px; padding: 6px 12px; font-size: 0.82rem;">
               <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-              GitHub Deposu
+              <span data-i18n="footerGhRepo">GitHub Deposu</span>
             </a>
             <a href="https://github.com/berkevnl/E-Helper/releases/latest" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="min-height: 36px; padding: 6px 12px; font-size: 0.82rem;">
-              Son Sürüm (v1.1.1)
+              <span data-i18n="footerLatestRelease">Son Sürüm (v1.1.1)</span>
             </a>
           </div>
         </div>
 
         <div class="footer-col">
-          <h5>Bağlantılar</h5>
+          <h5 data-i18n="footerColLinks">Bağlantılar</h5>
           <ul class="footer-links">
-            <li><a href="#simulator">Canlı Simülatör</a></li>
-            <li><a href="#comparison">Karşılaştırma</a></li>
-            <li><a href="#features">Özellikler</a></li>
-            <li><a href="#guide">Kullanım Rehberi</a></li>
-            <li><a href="#hardware">Desteklenen Modeller</a></li>
-            <li><a href="#changelog">Sürüm Notları</a></li>
+            <li><a href="#simulator" data-i18n="navSimulator">Canlı Simülatör</a></li>
+            <li><a href="#comparison" data-i18n="navComparison">Karşılaştırma</a></li>
+            <li><a href="#features" data-i18n="navFeatures">Özellikler</a></li>
+            <li><a href="#guide" data-i18n="navGuide">Kullanım Rehberi</a></li>
+            <li><a href="#hardware" data-i18n="navHardware">Desteklenen Modeller</a></li>
+            <li><a href="#changelog" data-i18n="navChangelog">Sürüm Notları</a></li>
           </ul>
         </div>
 
         <div class="footer-col">
-          <h5>Topluluk & Lisans</h5>
+          <h5 data-i18n="footerColCommunity">Topluluk & Lisans</h5>
           <ul class="footer-links">
-            <li><a href="https://github.com/berkevnl/E-Helper/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">GPL-3.0 Lisansı</a></li>
-            <li><a href="https://github.com/berkevnl/E-Helper/issues" target="_blank" rel="noopener noreferrer">Hata Bildir</a></li>
-            <li><a href="https://github.com/seerge/g-helper" target="_blank" rel="noopener noreferrer">G-Helper (İlham)</a></li>
-            <li><a href="https://github.com/berkevnl" target="_blank" rel="noopener noreferrer">Geliştirici Profili</a></li>
+            <li><a href="https://github.com/berkevnl/E-Helper/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" data-i18n="footerLicense">GPL-3.0 Lisansı</a></li>
+            <li><a href="https://github.com/berkevnl/E-Helper/issues" target="_blank" rel="noopener noreferrer" data-i18n="footerReport">Hata Bildir</a></li>
+            <li><a href="https://github.com/seerge/g-helper" target="_blank" rel="noopener noreferrer" data-i18n="footerInspiration">G-Helper (İlham)</a></li>
+            <li><a href="https://github.com/berkevnl" target="_blank" rel="noopener noreferrer" data-i18n="footerDev">Geliştirici Profili</a></li>
           </ul>
         </div>
       </div>
 
-      <div class="disclaimer-box">
+      <div class="disclaimer-box" data-i18n="footerDisclaimer">
         <strong>Yasal Bildirim:</strong> Casper, Excalibur, Windows ve NVIDIA ilgili hak sahiplerinin ticari markalarıdır. E-Helper bağımsız ve açık kaynaklı bir topluluk projesidir.
       </div>
 
       <div class="footer-bottom">
-        <div>© 2026 E-Helper • GNU Genel Kamu Lisansı v3.0 (GPL-3.0)</div>
-        <div>Tasarım: Precision Stealth & Hardware Telemetry</div>
+        <div data-i18n="footerCopy">© 2026 E-Helper • GNU Genel Kamu Lisansı v3.0 (GPL-3.0)</div>
+        <div data-i18n="footerDesign">Tasarım: Precision Stealth & Hardware Telemetry</div>
       </div>
     </div>
   </footer>

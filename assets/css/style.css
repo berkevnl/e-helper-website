@@ -137,7 +137,45 @@ body {
     radial-gradient(circle 600px at 80% 90%, rgba(0, 240, 255, 0.05), transparent 75%);
   background-attachment: fixed;
   min-height: 100vh;
-  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+/* Smooth, Unified Theme Transitions across all interactive and surface blocks */
+body,
+.site-header,
+.hero-section,
+.hero-pill,
+.stats-strip,
+.stat-item,
+.simulator-section,
+.simulator-container,
+.virtual-app-window,
+.laptop-chassis-card,
+.gauge-card,
+.simulator-explainer-banner,
+.comparison-section,
+.comparison-table-wrapper,
+.comparison-table th,
+.comparison-table td,
+.features-section,
+.feature-card,
+.feature-icon-wrapper,
+.guide-section,
+.step-card,
+.step-tip,
+.hardware-section,
+.hardware-card-wrapper,
+.model-chip,
+.changelog-section,
+.tab-btn,
+.version-card,
+.faq-section,
+.faq-item,
+.site-footer,
+.disclaimer-box {
+  transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 [data-theme="light"] body {
@@ -968,6 +1006,41 @@ img {
   color: #0f172a;
 }
 
+[data-theme="light"] .simulator-container {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+[data-theme="light"] .simulator-explainer-banner {
+  background: rgba(2, 132, 199, 0.05);
+  border-color: #cbd5e1;
+  color: #475569;
+}
+
+[data-theme="light"] .tab-btn {
+  background-color: #f1f5f9;
+  border-color: #cbd5e1;
+  color: #475569;
+}
+
+[data-theme="light"] .tab-btn.active {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #0284c7;
+}
+
+[data-theme="light"] .disclaimer-box {
+  background: #f1f5f9;
+  border-color: #e2e8f0;
+  color: #64748b;
+}
+
+[data-theme="light"] .site-footer {
+  background-color: #f8fafc;
+  border-top-color: #e2e8f0;
+}
+
 /* RIGHT: Virtual Laptop Chassis Reaction */
 .visualizer-pane {
   display: flex;
@@ -1074,7 +1147,7 @@ img {
   background: var(--sim-key-bg);
   border-radius: 3px;
   border: 1px solid var(--sim-key-border);
-  transition: box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease, opacity 0.25s ease;
+  transition: none; /* Direct RAF loop control for butter-smooth 60-240Hz rendering */
 }
 
 .deck-zone-color-label {
