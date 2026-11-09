@@ -1,6 +1,6 @@
 /* ===================================================================
    E-Helper Showcase & Portal — Official Design System & Styles
-   Aesthetic: Precision Stealth & Hardware Telemetry
+   Aesthetic: Precision Stealth & Hardware Telemetry (Subtle Ambient Glow)
    Standards: WCAG AA, Fluid Responsive, 0-Bloat Vanilla CSS
    =================================================================== */
 
@@ -13,7 +13,7 @@
   --bg-card: rgba(16, 22, 35, 0.85);
   --bg-card-hover: rgba(24, 33, 52, 0.95);
   --bg-input: #141a29;
-  --bg-glass: rgba(13, 18, 29, 0.8);
+  --bg-glass: rgba(13, 18, 29, 0.85);
 
   /* Specific Simulator Surfaces for Dark Mode */
   --sim-app-bg: #141824;
@@ -21,8 +21,8 @@
   --sim-tile-bg: #1a2030;
   --sim-tile-hover: #222b40;
   --sim-chassis-bg: #090c14;
-  --sim-deck-bg: #101420;
-  --sim-key-bg: #182030;
+  --sim-deck-bg: #0d111a;
+  --sim-key-bg: #161d2b;
   --sim-key-border: rgba(255, 255, 255, 0.12);
 
   --border-subtle: rgba(255, 255, 255, 0.08);
@@ -79,15 +79,15 @@
   --bg-input: #f1f5f9;
   --bg-glass: rgba(255, 255, 255, 0.88);
 
-  /* Specific Simulator Surfaces for Light Mode (Noticeably Light) */
+  /* Simulator Light Mode Surfaces */
   --sim-app-bg: #ffffff;
   --sim-app-border: #cbd5e1;
   --sim-tile-bg: #f8fafc;
   --sim-tile-hover: #f1f5f9;
-  --sim-chassis-bg: #f1f5f9;
-  --sim-deck-bg: #e2e8f0;
-  --sim-key-bg: #ffffff;
-  --sim-key-border: #cbd5e1;
+  --sim-chassis-bg: #ffffff;
+  --sim-deck-bg: #0d111a; /* Dark keyboard bed remains for vivid LED contrast */
+  --sim-key-bg: #161d2b;
+  --sim-key-border: rgba(255, 255, 255, 0.12);
 
   --border-subtle: #e2e8f0;
   --border-medium: #cbd5e1;
@@ -99,9 +99,9 @@
   --text-inverse: #ffffff;
 
   --accent-cyan: #0284c7;
-  --accent-cyan-glow: rgba(2, 132, 199, 0.18);
+  --accent-cyan-glow: rgba(2, 132, 199, 0.2);
   --accent-emerald: #059669;
-  --accent-emerald-glow: rgba(5, 150, 105, 0.18);
+  --accent-emerald-glow: rgba(5, 150, 105, 0.2);
 
   --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.05);
   --shadow-md: 0 10px 25px rgba(15, 23, 42, 0.07);
@@ -129,9 +129,12 @@ body {
   line-height: 1.6;
   font-size: 15px;
   overflow-x: hidden;
+  /* Ambient Ethereal Glow Background (Eye-friendly & Subtle) */
   background-image: 
-    radial-gradient(ellipse 70% 40% at 50% -15%, rgba(0, 240, 255, 0.07), transparent),
-    radial-gradient(circle at 90% 15%, rgba(16, 185, 129, 0.04), transparent);
+    radial-gradient(circle 650px at 15% 10%, rgba(0, 240, 255, 0.08), transparent 80%),
+    radial-gradient(circle 550px at 85% 25%, rgba(16, 185, 129, 0.06), transparent 75%),
+    radial-gradient(circle 750px at 50% 60%, rgba(2, 132, 199, 0.04), transparent 80%),
+    radial-gradient(circle 600px at 80% 90%, rgba(0, 240, 255, 0.05), transparent 75%);
   background-attachment: fixed;
   min-height: 100vh;
   transition: background-color var(--transition-normal), color var(--transition-normal);
@@ -139,8 +142,10 @@ body {
 
 [data-theme="light"] body {
   background-image: 
-    radial-gradient(ellipse 70% 40% at 50% -15%, rgba(2, 132, 199, 0.06), transparent),
-    radial-gradient(circle at 90% 15%, rgba(16, 185, 129, 0.03), transparent);
+    radial-gradient(circle 650px at 15% 10%, rgba(2, 132, 199, 0.07), transparent 80%),
+    radial-gradient(circle 550px at 85% 25%, rgba(16, 185, 129, 0.05), transparent 75%),
+    radial-gradient(circle 750px at 50% 60%, rgba(14, 165, 233, 0.04), transparent 80%),
+    radial-gradient(circle 600px at 80% 90%, rgba(2, 132, 199, 0.05), transparent 75%);
 }
 
 .tabular-nums {
@@ -577,7 +582,7 @@ img {
   transition: all var(--transition-normal);
 }
 
-/* Virtual E-Helper Flyout Window (Adapts to Dark & Light Mode) */
+/* Virtual E-Helper Flyout Window */
 .virtual-app-window {
   background-color: var(--sim-app-bg);
   border: 1px solid var(--sim-app-border);
@@ -779,7 +784,7 @@ img {
   height: 14px;
   border-radius: 3px;
   border: 1px solid var(--border-medium);
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
 }
 
 .app-slider-row {
@@ -864,7 +869,106 @@ img {
   font-size: 0.7rem;
 }
 
-/* RIGHT: Virtual Laptop Chassis (Adapts to Dark & Light Mode) */
+/* ===================================================================
+   LIGHT THEME EXPLICIT OVERRIDES FOR SIMULATOR TEXT READABILITY
+   =================================================================== */
+[data-theme="light"] .virtual-app-window {
+  background-color: #ffffff;
+  border-color: #cbd5e1;
+  color: #0f172a;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .virtual-app-window .app-title-text,
+[data-theme="light"] .virtual-app-window .app-section-title,
+[data-theme="light"] .virtual-app-window .mode-tile-label,
+[data-theme="light"] .virtual-app-window .app-stat-val,
+[data-theme="light"] .virtual-app-window .app-select,
+[data-theme="light"] .virtual-app-window .app-color-trigger,
+[data-theme="light"] .virtual-app-window .app-slider-row,
+[data-theme="light"] .virtual-app-window .zone-box,
+[data-theme="light"] .virtual-app-window .app-footer,
+[data-theme="light"] .virtual-app-window .app-checkbox-label {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .virtual-app-window .app-telemetry-pill,
+[data-theme="light"] .virtual-app-window .app-stat-head,
+[data-theme="light"] .virtual-app-window .app-ver-tag {
+  color: #475569 !important;
+}
+
+[data-theme="light"] .virtual-app-window .app-telemetry-pill strong {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .virtual-app-window .mode-tile-btn {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #0f172a;
+}
+
+[data-theme="light"] .virtual-app-window .mode-tile-btn.active {
+  background: rgba(2, 132, 199, 0.12);
+  border-color: #0284c7;
+  color: #0284c7 !important;
+}
+
+[data-theme="light"] .virtual-app-window .mode-tile-btn.active .mode-tile-label {
+  color: #0284c7 !important;
+}
+
+[data-theme="light"] .virtual-app-window .app-stat-box,
+[data-theme="light"] .virtual-app-window .app-select,
+[data-theme="light"] .virtual-app-window .app-color-trigger,
+[data-theme="light"] .virtual-app-window .app-zone-map {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+[data-theme="light"] .virtual-app-window .zone-box {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .virtual-app-window .zone-box.active {
+  border-color: #0284c7;
+  box-shadow: 0 0 8px rgba(2, 132, 199, 0.25);
+}
+
+[data-theme="light"] .laptop-chassis-card {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .chassis-title {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .readout-item {
+  color: #475569 !important;
+}
+
+[data-theme="light"] .readout-item strong {
+  color: #0284c7 !important;
+}
+
+[data-theme="light"] .gauge-card {
+  background: #ffffff;
+  border-color: #e2e8f0;
+}
+
+[data-theme="light"] .gauge-name {
+  color: #64748b;
+}
+
+[data-theme="light"] .gauge-reading {
+  color: #0f172a;
+}
+
+/* RIGHT: Virtual Laptop Chassis Reaction */
 .visualizer-pane {
   display: flex;
   flex-direction: column;
@@ -911,13 +1015,14 @@ img {
   color: var(--accent-cyan);
 }
 
+/* Keyboard deck remains high contrast dark stage so RGB lights glow vibrantly */
 .virtual-keyboard-deck {
   background: var(--sim-deck-bg);
-  border: 2px solid var(--border-medium);
+  border: 2px solid var(--sim-app-border);
   border-radius: 10px;
   padding: 14px;
   position: relative;
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.4);
   transition: background-color var(--transition-normal), border-color var(--transition-normal);
 }
 
@@ -929,9 +1034,9 @@ img {
 }
 
 .deck-zone {
-  background: var(--sim-app-bg);
+  background: #141926;
   border-radius: 6px;
-  border: 1px solid var(--border-subtle);
+  border: 1px solid #253046;
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -945,11 +1050,15 @@ img {
   font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
-  color: var(--text-primary);
+  color: #f8fafc !important;
   display: flex;
   align-items: center;
   justify-content: space-between;
   z-index: 1;
+}
+
+.deck-zone-title span {
+  color: #f8fafc !important;
 }
 
 .deck-key-matrix {
@@ -965,14 +1074,20 @@ img {
   background: var(--sim-key-bg);
   border-radius: 3px;
   border: 1px solid var(--sim-key-border);
-  transition: all 0.25s ease;
+  transition: box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease, opacity 0.25s ease;
 }
 
 .deck-zone-color-label {
   font-size: 0.68rem;
   font-family: var(--font-mono);
-  color: var(--text-muted);
+  color: var(--accent-cyan);
+  font-weight: 700;
   z-index: 1;
+}
+
+.deck-zone > span {
+  color: #94a3b8 !important;
+  font-size: 0.65rem;
 }
 
 .telemetry-gauges-row {

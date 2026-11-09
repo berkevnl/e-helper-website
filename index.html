@@ -8,8 +8,8 @@
   <!-- Primary Meta Tags -->
   <title>E-Helper — Casper Excalibur Dizüstü Bilgisayarlar İçin Ultra Hafif Kontrol Merkezi</title>
   <meta name="title" content="E-Helper — Casper Excalibur Dizüstü Bilgisayarlar İçin Ultra Hafif Kontrol Merkezi">
-  <meta name="description" content="Casper Excalibur dizüstü bilgisayarlar için resmi kontrol yazılımına alternatif, 1-5 MB RAM tüketen, sıfır arka plan servisine sahip açık kaynaklı donanım yönetim aracı.">
-  <meta name="keywords" content="Casper Excalibur, E-Helper, G-Helper, Excalibur Control Center alternatifi, G770, G870, G911, RGB klavye, fan kontrolü, hafif donanım yazılımı">
+  <meta name="description" content="Casper Excalibur dizüstü bilgisayarlar için resmi kontrol yazılımına alternatif, 1-5 MB RAM tüketen, 2.6 MB boyutunda ve sıfır arka plan servisine sahip açık kaynaklı donanım yönetim aracı.">
+  <meta name="keywords" content="Casper Excalibur, E-Helper, G-Helper, Excalibur Control Center alternatifi, G770, G850, G860, G870, G911, RGB klavye, fan kontrolü, hafif donanım yazılımı">
   <meta name="author" content="Berke (berkevnl)">
   <meta name="theme-color" content="#07090e">
 
@@ -138,7 +138,7 @@
             <svg class="icon icon-sm" viewBox="0 0 24 24" style="color: var(--accent-emerald);">
               <polyline points="20 6 9 17 4 12"></polyline>
             </svg>
-            <strong data-i18n="metaReq">Windows 10/11 • Kurulumsuz Tek Dosya • Taşınabilir</strong>
+            <strong data-i18n="metaReq">Windows 10/11 • Kurulumsuz Tek Dosya (~2.6 MB) • Taşınabilir</strong>
           </span>
         </div>
 
@@ -325,8 +325,8 @@
               <!-- 3-Zone Virtual Laptop Keyboard Deck -->
               <div class="virtual-keyboard-deck">
                 <div class="keyboard-grid-3zone">
-                  <!-- Left Zone (WASD & Alpha 1) -->
-                  <div class="deck-zone" id="deckZoneLeft" style="color: #00f0ff;">
+                  <!-- Left Zone (WASD) -->
+                  <div class="deck-zone" id="deckZoneLeft">
                     <div class="deck-zone-title">
                       <span>Bölge 1: WASD</span>
                       <span class="deck-zone-color-label">#00F0FF</span>
@@ -336,11 +336,11 @@
                       <div class="matrix-key"></div><div class="matrix-key"></div><div class="matrix-key"></div><div class="matrix-key"></div>
                       <div class="matrix-key"></div><div class="matrix-key"></div><div class="matrix-key"></div><div class="matrix-key"></div>
                     </div>
-                    <span style="font-size: 0.65rem; color: var(--text-muted);">WASD & Sayılar</span>
+                    <span>WASD & Sayılar</span>
                   </div>
 
                   <!-- Center Zone (Typing & Arrows) -->
-                  <div class="deck-zone" id="deckZoneMid" style="color: #10b981;">
+                  <div class="deck-zone" id="deckZoneMid">
                     <div class="deck-zone-title">
                       <span>Bölge 2: Orta</span>
                       <span class="deck-zone-color-label">#10B981</span>
@@ -350,11 +350,11 @@
                       <div class="matrix-key"></div><div class="matrix-key"></div><div class="matrix-key"></div><div class="matrix-key"></div>
                       <div class="matrix-key"></div><div class="matrix-key"></div><div class="matrix-key"></div><div class="matrix-key"></div>
                     </div>
-                    <span style="font-size: 0.65rem; color: var(--text-muted);">Yazı & Boşluk</span>
+                    <span>Yazı & Boşluk</span>
                   </div>
 
                   <!-- Right Zone (Numpad) -->
-                  <div class="deck-zone" id="deckZoneRight" style="color: #ef4444;">
+                  <div class="deck-zone" id="deckZoneRight">
                     <div class="deck-zone-title">
                       <span>Bölge 3: Numpad</span>
                       <span class="deck-zone-color-label">#EF4444</span>
@@ -364,7 +364,7 @@
                       <div class="matrix-key"></div><div class="matrix-key"></div><div class="matrix-key"></div>
                       <div class="matrix-key"></div><div class="matrix-key"></div><div class="matrix-key"></div>
                     </div>
-                    <span style="font-size: 0.65rem; color: var(--text-muted);">Numpad</span>
+                    <span>Numpad</span>
                   </div>
                 </div>
               </div>
@@ -496,17 +496,17 @@
                 </td>
               </tr>
               <tr>
-                <td><strong>Dosya Boyutu & Kurulum</strong></td>
+                <td><strong>Gerçek Dosya Boyutu</strong></td>
                 <td>
                   <span class="badge-tag-good">
                     <svg class="icon icon-sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    ~8 - 15 MB Tek Dosya (Portable)
+                    ~2.6 MB Tek Dosya (.exe, Kurulumsuz)
                   </span>
                 </td>
                 <td>
                   <span class="badge-tag-bad">
                     <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                    ~200 - 300 MB Setup Paketi & Registry Kayıtları
+                    ~200 - 350 MB Setup Yükleyici Paketi
                   </span>
                 </td>
               </tr>
@@ -648,7 +648,7 @@
             <div class="step-badge">1. İndir</div>
             <h3>E-Helper.exe'yi Edinin</h3>
             <p>Releases sayfasından son sürümü bilgisayarınıza indirin. Herhangi bir kurulum sihirbazı veya ekstra paket gerekmez.</p>
-            <div class="step-tip">Tek dosya (.exe) halinde çalışır.</div>
+            <div class="step-tip">Sadece ~2.6 MB tek dosya halinde çalışır.</div>
           </div>
 
           <div class="step-card">
@@ -671,7 +671,7 @@
     </section>
 
     <!-- ===================================================================
-         HARDWARE COMPATIBILITY
+         HARDWARE COMPATIBILITY (SEPARATED G850 & G860)
          =================================================================== -->
     <section class="hardware-section" id="hardware">
       <div class="container">
@@ -690,7 +690,11 @@
               <span class="model-status-pill verified">Doğrulandı</span>
             </div>
             <div class="model-chip">
-              <span class="model-name">Excalibur G850 / G860</span>
+              <span class="model-name">Excalibur G850</span>
+              <span class="model-status-pill verified">Doğrulandı</span>
+            </div>
+            <div class="model-chip">
+              <span class="model-name">Excalibur G860</span>
               <span class="model-status-pill verified">Doğrulandı</span>
             </div>
             <div class="model-chip">

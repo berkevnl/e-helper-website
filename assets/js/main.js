@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
       heroSubtitle: "Üreticinin yüzlerce MB RAM harcayan ağır yazılımına elveda deyin. Sadece 1-5 MB bellek kullanımı, sıfır arka plan servisi ve doğrudan donanım yönetimi.",
       downloadCta: "E-Helper.exe İndir (v1.1.1)",
       githubCta: "GitHub'da İncele",
-      metaReq: "Windows 10/11 • Kurulumsuz Tek Dosya • Taşınabilir",
+      metaReq: "Windows 10/11 • Kurulumsuz Tek Dosya (~2.6 MB) • Taşınabilir",
       statRamVal: "1-5 MB",
       statRamLbl: "RAM Tüketimi",
       statRamDesc: "Resmi merkeze göre %98 daha hafif",
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
       heroSubtitle: "Say goodbye to manufacturer bloatware taking hundreds of MBs of RAM. Enjoy only 1-5 MB memory usage, zero background services, and direct hardware communication.",
       downloadCta: "Download E-Helper.exe (v1.1.1)",
       githubCta: "View on GitHub",
-      metaReq: "Windows 10/11 • Portable Single Binary • No Install",
+      metaReq: "Windows 10/11 • Single Binary (~2.6 MB) • No Install",
       statRamVal: "1-5 MB",
       statRamLbl: "RAM Footprint",
       statRamDesc: "98% lighter than official Control Center",
@@ -298,44 +298,43 @@ document.addEventListener('DOMContentLoaded', () => {
   let dynamicCycleTimer = null;
   let animationTime = 0;
 
-  // Helper: Apply color & brightness to keys of a deck zone
+  // Render individual zone styling & glow based on brightness
   function renderDeckZone(deckZone, color, brightnessLevel, pulseFactor = 1) {
     const keys = deckZone.querySelectorAll('.matrix-key');
     const label = deckZone.querySelector('.deck-zone-color-label');
     if (label) label.textContent = color.toUpperCase();
-    deckZone.style.color = color;
 
     // Brightness levels:
-    // 0: Kapalı (%0) -> dark keys, no glow, opacity 0.25
-    // 1: Orta (%50)  -> subtle soft glow, opacity 0.55 * pulseFactor
-    // 2: Tam (%100)  -> vivid neon glow, opacity 1.0 * pulseFactor
+    // 0: Kapalı (%0) -> Dark keycaps, zero glow, opacity 0.2
+    // 1: Orta (%50)  -> Soft gentle glow, opacity ~0.55 * pulseFactor
+    // 2: Tam (%100)  -> Full neon glow, opacity ~1.0 * pulseFactor
     if (brightnessLevel === 0) {
       keys.forEach(k => {
         k.style.boxShadow = 'none';
-        k.style.borderColor = 'var(--sim-key-border)';
-        k.style.backgroundColor = 'var(--sim-key-bg)';
-        k.style.opacity = '0.3';
+        k.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+        k.style.backgroundColor = '#161d2b';
+        k.style.opacity = '0.22';
       });
     } else if (brightnessLevel === 1) {
       const glowAlpha = (0.55 * pulseFactor).toFixed(2);
       keys.forEach(k => {
-        k.style.boxShadow = `0 0 5px ${color}`;
+        k.style.boxShadow = `0 0 6px ${color}`;
         k.style.borderColor = color;
-        k.style.backgroundColor = color + '2b';
+        k.style.backgroundColor = color + '2e';
         k.style.opacity = glowAlpha;
       });
     } else {
       const glowAlpha = (1.0 * pulseFactor).toFixed(2);
       keys.forEach(k => {
-        k.style.boxShadow = `0 0 12px ${color}, 0 0 4px ${color}`;
+        k.style.boxShadow = `0 0 14px ${color}, 0 0 4px ${color}`;
         k.style.borderColor = color;
-        k.style.backgroundColor = color + '4d';
+        k.style.backgroundColor = color + '52';
         k.style.opacity = glowAlpha;
       });
     }
   }
 
-  // Stop active animations when changing modes
+  // Stop running animations
   function stopRgbAnimations() {
     if (rgbAnimationId) {
       cancelAnimationFrame(rgbAnimationId);
@@ -347,12 +346,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Start chosen RGB Mode
   function startRgbMode() {
     stopRgbAnimations();
     const mode = simState.rgbMode;
     const b = simState.brightness;
 
-    // TripleZone panel visibility
+    // TripleZone map visibility & indicators
     if (mode === 'TripleZone') {
       pnlTripleZoneDiagram.style.display = 'grid';
       btnZoneLeft.style.borderColor = simState.zoneColors[0];
@@ -374,31 +374,33 @@ document.addEventListener('DOMContentLoaded', () => {
       renderDeckZone(deckZoneMid, color, b);
       renderDeckZone(deckZoneRight, color, b);
     } else if (mode === 'Breathing') {
-      // Smooth sine-wave breathing animation
+      // Smooth sine wave breathing animation
       const color = simState.zoneColors[0];
       brdModeColorIndicator.style.backgroundColor = color;
 
       function breatheStep() {
-        animationTime += 0.04;
-        // Pulse factor oscillates smoothly between 0.15 and 1.0
-        const pulse = 0.15 + 0.85 * (Math.sin(animationTime) + 1) / 2;
+        animationTime += 0.035;
+        // Pulse factor oscillates smoothly between 0.12 and 1.0
+        const pulse = 0.12 + 0.88 * ((Math.sin(animationTime) + 1) / 2);
         renderDeckZone(deckZoneLeft, color, b, pulse);
         renderDeckZone(deckZoneMid, color, b, pulse);
         renderDeckZone(deckZoneRight, color, b, pulse);
+        brdModeColorIndicator.style.opacity = (0.3 + 0.7 * pulse).toFixed(2);
         rgbAnimationId = requestAnimationFrame(breatheStep);
       }
       breatheStep();
     } else if (mode === 'Rainbow') {
-      // User requested: "gökkuşağında sağdan ve soldan ortaya doğru kayarak renkler değişsin"
-      // Left and Right zones cycle together and flow inward towards Center zone!
+      // User requested: "sağdan ve soldan ortaya doğru kayarak renk geçişi sağlansın tüm renkler için"
       function rainbowStep() {
-        animationTime += 1.2;
-        const outerHue = (animationTime) % 360;
-        const centerHue = (animationTime + 90) % 360;
+        animationTime += 1.4;
+        const outerHue = Math.floor(animationTime) % 360;
+        // Center zone lags behind, creating an inward flowing wave from both left & right towards center!
+        const centerHue = Math.floor(animationTime - 70 + 360) % 360;
 
         const outerColor = `hsl(${outerHue}, 100%, 55%)`;
         const centerColor = `hsl(${centerHue}, 100%, 55%)`;
         brdModeColorIndicator.style.backgroundColor = outerColor;
+        brdModeColorIndicator.style.opacity = '1';
 
         renderDeckZone(deckZoneLeft, outerColor, b);
         renderDeckZone(deckZoneRight, outerColor, b);
@@ -408,29 +410,30 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       rainbowStep();
     } else if (mode === 'ColorfulCycle') {
-      // User requested: "dinamik döngüde ise üç bölgeli şekilde her bölge random renk alacak şekilde değişsin"
+      // User requested: "dinamik modda 3 bölgeli şekilde renkler dinamik olarak rastgele değişmeli"
       function pickRandomVibrantColor(exclude) {
         const pool = simState.colorPalette.filter(c => c !== exclude && c !== '#ffffff');
         return pool[Math.floor(Math.random() * pool.length)];
       }
 
       function cycleZones() {
-        const c0 = pickRandomVibrantColor(deckZoneLeft.style.color);
-        const c1 = pickRandomVibrantColor(deckZoneMid.style.color);
-        const c2 = pickRandomVibrantColor(deckZoneRight.style.color);
+        const c0 = pickRandomVibrantColor(deckZoneLeft.querySelector('.deck-zone-color-label')?.textContent);
+        const c1 = pickRandomVibrantColor(deckZoneMid.querySelector('.deck-zone-color-label')?.textContent);
+        const c2 = pickRandomVibrantColor(deckZoneRight.querySelector('.deck-zone-color-label')?.textContent);
 
         renderDeckZone(deckZoneLeft, c0, b);
         renderDeckZone(deckZoneMid, c1, b);
         renderDeckZone(deckZoneRight, c2, b);
         brdModeColorIndicator.style.backgroundColor = c0;
+        brdModeColorIndicator.style.opacity = '1';
       }
 
       cycleZones();
-      dynamicCycleTimer = setInterval(cycleZones, 1600);
+      dynamicCycleTimer = setInterval(cycleZones, 1400);
     }
   }
 
-  // Brightness slider change
+  // Brightness slider change (0, 1, 2)
   sliderBrightness.addEventListener('input', (e) => {
     const val = parseInt(e.target.value);
     simState.brightness = val;
@@ -465,7 +468,7 @@ document.addEventListener('DOMContentLoaded', () => {
       b.classList.add('active');
       simState.activeZone = idx;
 
-      // Cycle zone color immediately
+      // Cycle zone color
       const curColor = simState.zoneColors[idx];
       const nextIdx = (simState.colorPalette.indexOf(curColor) + 1) % simState.colorPalette.length;
       simState.zoneColors[idx] = simState.colorPalette[nextIdx];
@@ -512,7 +515,6 @@ document.addEventListener('DOMContentLoaded', () => {
       themeToggleBtn.setAttribute('title', 'Açık Temaya Geç');
     }
 
-    // Refresh active RGB mode to sync key borders with theme
     startRgbMode();
   }
 
