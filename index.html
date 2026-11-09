@@ -8,7 +8,7 @@
   <!-- Primary Meta Tags -->
   <title>E-Helper — Casper Excalibur Dizüstü Bilgisayarlar İçin Ultra Hafif Kontrol Merkezi</title>
   <meta name="title" content="E-Helper — Casper Excalibur Dizüstü Bilgisayarlar İçin Ultra Hafif Kontrol Merkezi">
-  <meta name="description" content="Casper Excalibur dizüstü bilgisayarlar için resmi kontrol yazılımına alternatif, 1-5 MB RAM tüketen, 2.6 MB boyutunda ve sıfır arka plan servisine sahip açık kaynaklı donanım yönetim aracı.">
+  <meta name="description" content="Casper Excalibur dizüstü bilgisayarlar için resmi kontrol yazılımına alternatif, arka planda 1-10 MB RAM harcayan, ~65 MB boyutunda ve sıfır arka plan servisine sahip açık kaynaklı donanım yönetim aracı.">
   <meta name="keywords" content="Casper Excalibur, E-Helper, G-Helper, Excalibur Control Center alternatifi, G770, G850, G860, G870, G911, RGB klavye, fan kontrolü, hafif donanım yazılımı">
   <meta name="author" content="Berke (berkevnl)">
   <meta name="theme-color" content="#07090e">
@@ -24,7 +24,7 @@
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://berkevnl.github.io/e-helper-website/">
   <meta property="twitter:title" content="E-Helper — Casper Excalibur Kontrol Merkezi">
-  <meta property="twitter:description" content="Sadece 1-5 MB RAM tüketen, sıfır arka plan servisiyle çalışan Casper Excalibur donanım yöneticisi.">
+  <meta property="twitter:description" content="Arka planda 1-10 MB RAM harcayan, sıfır arka plan servisiyle çalışan Casper Excalibur donanım yöneticisi.">
   <meta property="twitter:image" content="assets/images/cover.jpg">
 
   <!-- Favicon -->
@@ -112,7 +112,7 @@
         </h1>
 
         <p class="hero-subtitle" data-i18n="heroSubtitle">
-          Üreticinin yüzlerce MB RAM harcayan ağır yazılımına elveda deyin. Sadece 1-5 MB bellek kullanımı, sıfır arka plan servisi ve doğrudan donanım yönetimi.
+          Üreticinin yüzlerce MB RAM harcayan ağır yazılımına elveda deyin. Arka planda 1-10 MB, aktif ekranda ~40-50 MB bellek kullanımı, sıfır arka plan servisi ve doğrudan donanım yönetimi.
         </p>
 
         <div class="hero-cta-group">
@@ -138,16 +138,16 @@
             <svg class="icon icon-sm" viewBox="0 0 24 24" style="color: var(--accent-emerald);">
               <polyline points="20 6 9 17 4 12"></polyline>
             </svg>
-            <strong data-i18n="metaReq">Windows 10/11 • Kurulumsuz Tek Dosya (~2.6 MB) • Taşınabilir</strong>
+            <strong data-i18n="metaReq">Windows 10/11 • Kurulumsuz Tek Dosya (~65 MB) • Taşınabilir</strong>
           </span>
         </div>
 
         <!-- 4-Column Key Metrics Strip -->
         <div class="stats-strip">
           <div class="stat-item">
-            <div class="stat-value tabular-nums" data-i18n="statRamVal">1-5 MB</div>
-            <div class="stat-label" data-i18n="statRamLbl">RAM Tüketimi</div>
-            <div class="stat-desc" data-i18n="statRamDesc">Resmi merkeze göre %98 daha hafif</div>
+            <div class="stat-value tabular-nums" data-i18n="statRamVal">1-10 MB</div>
+            <div class="stat-label" data-i18n="statRamLbl">Arka Plan RAM</div>
+            <div class="stat-desc" data-i18n="statRamDesc">Aktif ekranda ~40-50 MB</div>
           </div>
           <div class="stat-item">
             <div class="stat-value tabular-nums green" data-i18n="statSvcVal">0 Servis</div>
@@ -322,14 +322,13 @@
                 </div>
               </div>
 
-              <!-- 3-Zone Virtual Laptop Keyboard Deck -->
+              <!-- 3-Zone Virtual Laptop Keyboard Deck (Without Hex Text) -->
               <div class="virtual-keyboard-deck">
                 <div class="keyboard-grid-3zone">
                   <!-- Left Zone (WASD) -->
                   <div class="deck-zone" id="deckZoneLeft">
                     <div class="deck-zone-title">
                       <span>Bölge 1: WASD</span>
-                      <span class="deck-zone-color-label">#00F0FF</span>
                     </div>
                     <div class="deck-key-matrix">
                       <div class="matrix-key"></div><div class="matrix-key"></div><div class="matrix-key"></div><div class="matrix-key"></div>
@@ -343,7 +342,6 @@
                   <div class="deck-zone" id="deckZoneMid">
                     <div class="deck-zone-title">
                       <span>Bölge 2: Orta</span>
-                      <span class="deck-zone-color-label">#10B981</span>
                     </div>
                     <div class="deck-key-matrix">
                       <div class="matrix-key"></div><div class="matrix-key"></div><div class="matrix-key"></div><div class="matrix-key"></div>
@@ -357,7 +355,6 @@
                   <div class="deck-zone" id="deckZoneRight">
                     <div class="deck-zone-title">
                       <span>Bölge 3: Numpad</span>
-                      <span class="deck-zone-color-label">#EF4444</span>
                     </div>
                     <div class="deck-key-matrix">
                       <div class="matrix-key"></div><div class="matrix-key"></div><div class="matrix-key"></div>
@@ -436,17 +433,17 @@
             </thead>
             <tbody>
               <tr>
-                <td><strong>RAM Bellek Tüketimi (Boşta)</strong></td>
+                <td><strong>RAM Bellek Tüketimi</strong></td>
                 <td>
                   <span class="badge-tag-good">
                     <svg class="icon icon-sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    ~1 - 5 MB RAM (Ultra Düşük)
+                    ~1 - 10 MB (Arka Planda) / ~40 - 50 MB (Aktif Ekranda)
                   </span>
                 </td>
                 <td>
                   <span class="badge-tag-bad">
                     <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                    ~180 - 350+ MB RAM (Yüksek)
+                    ~180 - 350+ MB (Sürekli Arka Plan)
                   </span>
                 </td>
               </tr>
@@ -500,7 +497,7 @@
                 <td>
                   <span class="badge-tag-good">
                     <svg class="icon icon-sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    ~2.6 MB Tek Dosya (.exe, Kurulumsuz)
+                    ~65 MB Tek Dosya (.exe, Kurulumsuz)
                   </span>
                 </td>
                 <td>
@@ -547,7 +544,7 @@
     </section>
 
     <!-- ===================================================================
-         CORE FEATURES GRID (SIMPLIFIED & PUNCHY)
+         CORE FEATURES GRID
          =================================================================== -->
     <section class="features-section" id="features">
       <div class="container">
@@ -648,7 +645,7 @@
             <div class="step-badge">1. İndir</div>
             <h3>E-Helper.exe'yi Edinin</h3>
             <p>Releases sayfasından son sürümü bilgisayarınıza indirin. Herhangi bir kurulum sihirbazı veya ekstra paket gerekmez.</p>
-            <div class="step-tip">Sadece ~2.6 MB tek dosya halinde çalışır.</div>
+            <div class="step-tip">Sadece ~65 MB tek dosya halinde çalışır.</div>
           </div>
 
           <div class="step-card">
@@ -671,7 +668,7 @@
     </section>
 
     <!-- ===================================================================
-         HARDWARE COMPATIBILITY (SEPARATED G850 & G860)
+         HARDWARE COMPATIBILITY
          =================================================================== -->
     <section class="hardware-section" id="hardware">
       <div class="container">
@@ -756,7 +753,7 @@
               <ul class="version-highlights">
                 <li><span class="highlight-bullet">•</span><span><strong>Otomatik Güncelleme:</strong> GitHub API üzerinden yeni sürümleri denetleme ve tek tıkla kesintisiz yeniden başlatarak güncelleme.</span></li>
                 <li><span class="highlight-bullet">•</span><span><strong>Yenilenen Alt Çubuk:</strong> Daha sade footer arayüzü ve sürüm etiketleri.</span></li>
-                <li><span class="highlight-bullet">•</span><span><strong>Bellek İyileştirmesi:</strong> Boşta bellek tüketimi 1-5 MB bandında optimize edildi.</span></li>
+                <li><span class="highlight-bullet">•</span><span><strong>Bellek İyileştirmesi:</strong> Boşta bellek tüketimi 1-10 MB bandında optimize edildi.</span></li>
               </ul>
               <a href="https://github.com/berkevnl/E-Helper/releases/tag/v1.1.1" target="_blank" rel="noopener noreferrer" class="version-download-btn">
                 <span>v1.1.1 Sürüm Detayları →</span>

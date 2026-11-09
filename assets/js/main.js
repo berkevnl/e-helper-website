@@ -19,13 +19,13 @@ document.addEventListener('DOMContentLoaded', () => {
       heroPill: "Casper Excalibur Dizüstü Bilgisayarlar İçin Özel",
       heroTitle1: "Casper Excalibur Dizüstü Bilgisayarınız İçin",
       heroTitleGrad: "Ultra Hafif Kontrol Merkezi",
-      heroSubtitle: "Üreticinin yüzlerce MB RAM harcayan ağır yazılımına elveda deyin. Sadece 1-5 MB bellek kullanımı, sıfır arka plan servisi ve doğrudan donanım yönetimi.",
+      heroSubtitle: "Üreticinin yüzlerce MB RAM harcayan ağır yazılımına elveda deyin. Arka planda 1-10 MB, aktif ekranda ~40-50 MB bellek kullanımı, sıfır arka plan servisi ve doğrudan donanım yönetimi.",
       downloadCta: "E-Helper.exe İndir (v1.1.1)",
       githubCta: "GitHub'da İncele",
-      metaReq: "Windows 10/11 • Kurulumsuz Tek Dosya (~2.6 MB) • Taşınabilir",
-      statRamVal: "1-5 MB",
-      statRamLbl: "RAM Tüketimi",
-      statRamDesc: "Resmi merkeze göre %98 daha hafif",
+      metaReq: "Windows 10/11 • Kurulumsuz Tek Dosya (~65 MB) • Taşınabilir",
+      statRamVal: "1-10 MB",
+      statRamLbl: "Arka Plan RAM",
+      statRamDesc: "Aktif ekranda ~40-50 MB",
       statSvcVal: "0 Servis",
       statSvcLbl: "Arka Plan Yükü",
       statSvcDesc: "Sıfır CPU sömürüsü ve telemetri",
@@ -92,13 +92,13 @@ document.addEventListener('DOMContentLoaded', () => {
       heroPill: "Tailored for Casper Excalibur Gaming Laptops",
       heroTitle1: "Ultra-Lightweight Control Center for",
       heroTitleGrad: "Casper Excalibur Laptops",
-      heroSubtitle: "Say goodbye to manufacturer bloatware taking hundreds of MBs of RAM. Enjoy only 1-5 MB memory usage, zero background services, and direct hardware communication.",
+      heroSubtitle: "Say goodbye to manufacturer bloatware taking hundreds of MBs of RAM. Enjoy 1-10 MB in tray, ~40-50 MB on screen, zero background services, and direct hardware communication.",
       downloadCta: "Download E-Helper.exe (v1.1.1)",
       githubCta: "View on GitHub",
-      metaReq: "Windows 10/11 • Single Binary (~2.6 MB) • No Install",
-      statRamVal: "1-5 MB",
-      statRamLbl: "RAM Footprint",
-      statRamDesc: "98% lighter than official Control Center",
+      metaReq: "Windows 10/11 • Single Binary (~65 MB) • No Install",
+      statRamVal: "1-10 MB",
+      statRamLbl: "Background RAM",
+      statRamDesc: "~40-50 MB on active screen",
       statSvcVal: "0 Services",
       statSvcLbl: "Background Overhead",
       statSvcDesc: "Zero CPU drain and zero telemetry",
@@ -299,21 +299,20 @@ document.addEventListener('DOMContentLoaded', () => {
   let animationTime = 0;
 
   // Render individual zone styling & glow based on brightness
+  // (Hex color code text labels are intentionally omitted as requested)
   function renderDeckZone(deckZone, color, brightnessLevel, pulseFactor = 1) {
     const keys = deckZone.querySelectorAll('.matrix-key');
-    const label = deckZone.querySelector('.deck-zone-color-label');
-    if (label) label.textContent = color.toUpperCase();
 
     // Brightness levels:
     // 0: Kapalı (%0) -> Dark keycaps, zero glow, opacity 0.2
     // 1: Orta (%50)  -> Soft gentle glow, opacity ~0.55 * pulseFactor
     // 2: Tam (%100)  -> Full neon glow, opacity ~1.0 * pulseFactor
-    if (brightnessLevel === 0) {
+    if (brightnessLevel === 0 || pulseFactor <= 0.02) {
       keys.forEach(k => {
         k.style.boxShadow = 'none';
         k.style.borderColor = 'rgba(255, 255, 255, 0.08)';
         k.style.backgroundColor = '#161d2b';
-        k.style.opacity = '0.22';
+        k.style.opacity = '0.2';
       });
     } else if (brightnessLevel === 1) {
       const glowAlpha = (0.55 * pulseFactor).toFixed(2);
@@ -370,31 +369,38 @@ document.addEventListener('DOMContentLoaded', () => {
     if (mode === 'Static') {
       const color = simState.zoneColors[0];
       brdModeColorIndicator.style.backgroundColor = color;
+      brdModeColorIndicator.style.opacity = '1';
       renderDeckZone(deckZoneLeft, color, b);
       renderDeckZone(deckZoneMid, color, b);
       renderDeckZone(deckZoneRight, color, b);
     } else if (mode === 'Breathing') {
-      // Smooth sine wave breathing animation
+      // User requested: "hızını azalt ve renk tamamen gitsin, öyle geri gelsin"
       const color = simState.zoneColors[0];
       brdModeColorIndicator.style.backgroundColor = color;
 
       function breatheStep() {
-        animationTime += 0.035;
-        // Pulse factor oscillates smoothly between 0.12 and 1.0
-        const pulse = 0.12 + 0.88 * ((Math.sin(animationTime) + 1) / 2);
-        renderDeckZone(deckZoneLeft, color, b, pulse);
-        renderDeckZone(deckZoneMid, color, b, pulse);
-        renderDeckZone(deckZoneRight, color, b, pulse);
-        brdModeColorIndicator.style.opacity = (0.3 + 0.7 * pulse).toFixed(2);
+        animationTime += 0.016; // Relaxed, slow breath pace (~5.5s cycle)
+        const rawSin = Math.sin(animationTime);
+        // Remap so that at the bottom of the sine wave it drops cleanly to 0.0 (completely off)
+        let pulse = (rawSin + 0.75) / 1.75;
+        if (pulse < 0) pulse = 0;
+        if (pulse > 1) pulse = 1;
+        // Smoothstep easing for natural inhalation/exhalation
+        const smoothPulse = pulse * pulse * (3 - 2 * pulse);
+
+        renderDeckZone(deckZoneLeft, color, b, smoothPulse);
+        renderDeckZone(deckZoneMid, color, b, smoothPulse);
+        renderDeckZone(deckZoneRight, color, b, smoothPulse);
+        brdModeColorIndicator.style.opacity = (0.05 + 0.95 * smoothPulse).toFixed(2);
         rgbAnimationId = requestAnimationFrame(breatheStep);
       }
       breatheStep();
     } else if (mode === 'Rainbow') {
       // User requested: "sağdan ve soldan ortaya doğru kayarak renk geçişi sağlansın tüm renkler için"
       function rainbowStep() {
-        animationTime += 1.4;
+        animationTime += 1.2;
         const outerHue = Math.floor(animationTime) % 360;
-        // Center zone lags behind, creating an inward flowing wave from both left & right towards center!
+        // Center zone lags, so waves slide from outer Left & Right into Center
         const centerHue = Math.floor(animationTime - 70 + 360) % 360;
 
         const outerColor = `hsl(${outerHue}, 100%, 55%)`;
@@ -417,9 +423,13 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       function cycleZones() {
-        const c0 = pickRandomVibrantColor(deckZoneLeft.querySelector('.deck-zone-color-label')?.textContent);
-        const c1 = pickRandomVibrantColor(deckZoneMid.querySelector('.deck-zone-color-label')?.textContent);
-        const c2 = pickRandomVibrantColor(deckZoneRight.querySelector('.deck-zone-color-label')?.textContent);
+        const c0 = pickRandomVibrantColor(deckZoneLeft.dataset.lastColor);
+        const c1 = pickRandomVibrantColor(c0);
+        const c2 = pickRandomVibrantColor(c1);
+
+        deckZoneLeft.dataset.lastColor = c0;
+        deckZoneMid.dataset.lastColor = c1;
+        deckZoneRight.dataset.lastColor = c2;
 
         renderDeckZone(deckZoneLeft, c0, b);
         renderDeckZone(deckZoneMid, c1, b);
