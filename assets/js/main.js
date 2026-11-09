@@ -1,11 +1,11 @@
 /* ===================================================================
    E-Helper Showcase & Portal — Interactive Core Script
-   Features: Hardware Simulator, 3-Zone RGB Live Deck, TR/EN i18n, Theme Switcher
+   Features: Hardware Simulator, Dynamic 3-Zone RGB Engine, TR/EN i18n, Theme Switcher
    =================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
   // -----------------------------------------------------------------
-  // 1. Language Dictionary (TR & EN)
+  // 1. Language Dictionary (TR & EN) - Clean & User Friendly
   // -----------------------------------------------------------------
   const i18n = {
     tr: {
@@ -19,26 +19,26 @@ document.addEventListener('DOMContentLoaded', () => {
       heroPill: "Casper Excalibur Dizüstü Bilgisayarlar İçin Özel",
       heroTitle1: "Casper Excalibur Dizüstü Bilgisayarınız İçin",
       heroTitleGrad: "Ultra Hafif Kontrol Merkezi",
-      heroSubtitle: "Üreticinin yüzlerce MB RAM harcayan şişkin yazılımına elveda deyin. Sadece 1-5 MB bellek kullanımı, sıfır arka plan servisi ve doğrudan donanım yönetimi.",
+      heroSubtitle: "Üreticinin yüzlerce MB RAM harcayan ağır yazılımına elveda deyin. Sadece 1-5 MB bellek kullanımı, sıfır arka plan servisi ve doğrudan donanım yönetimi.",
       downloadCta: "E-Helper.exe İndir (v1.1.1)",
       githubCta: "GitHub'da İncele",
       metaReq: "Windows 10/11 • Kurulumsuz Tek Dosya • Taşınabilir",
       statRamVal: "1-5 MB",
-      statRamLbl: "RAM Bellek Tüketimi",
+      statRamLbl: "RAM Tüketimi",
       statRamDesc: "Resmi merkeze göre %98 daha hafif",
       statSvcVal: "0 Servis",
       statSvcLbl: "Arka Plan Yükü",
       statSvcDesc: "Sıfır CPU sömürüsü ve telemetri",
       statEcVal: "ACPI SMI",
-      statEcLbl: "Doğrudan Denetleyici",
+      statEcLbl: "Donanım Köprüsü",
       statEcDesc: "G-Helper felsefesiyle yerel haberleşme",
       statLicVal: "GPL-3.0",
-      statLicLbl: "Açık Kaynak Kod",
+      statLicLbl: "Açık Kaynak",
       statLicDesc: "Topluluk destekli, tam şeffaf",
       simBadge: "İnteraktif Deneyim",
-      simTitle: "E-Helper'ı Tarayıcınızda Canlı Test Edin",
-      simSubtitle: "Aşağıdaki sanal kontrol panelindeki modlara, RGB ayarlarına ve parlaklık sürgüsüne tıklayın; sağdaki laptop kasasının anında nasıl tepki verdiğini izleyin.",
-      simExplainer: "Bu simülatör, gerçek E-Helper WPF uygulamasının ve Casper Excalibur anakart donanım tepkilerinin birebir görselleştirilmiş halidir.",
+      simTitle: "E-Helper'ı Tarayıcınızda Canlı Deneyin",
+      simSubtitle: "Aşağıdaki sanal kontrol panelinde modları değiştirin, RGB modlarını ve parlaklık sürgüsünü test edin; sanal klavyenin anında nasıl tepki verdiğini izleyin.",
+      simExplainer: "Bu simülatör, gerçek E-Helper WPF arayüzünün ve Excalibur klavye/fan tepkilerinin birebir görselleştirilmiş halidir.",
       simTitleBar: "E-Helper — Casper Excalibur",
       simPowerTitle: "Performans Modu",
       modeOffice: "Tasarruf",
@@ -58,27 +58,22 @@ document.addEventListener('DOMContentLoaded', () => {
       chassisHeader: "Casper Excalibur Klavye & Fan Tepkisi",
       gaugeCpuFan: "CPU Fanı",
       gaugeGpuFan: "GPU Fanı",
-      gaugeAcoustic: "Akustik / Gürültü",
-      // Comparison
+      gaugeAcoustic: "Gürültü Seviyesi",
       compBadge: "Neden E-Helper?",
       compTitle: "Resmi Control Center ile Karşılaştırma",
-      compSubtitle: "E-Helper, bilgisayarınızı ağırlaştıran her şeyden arındırılmış saf bir donanım deneyimi sunar.",
+      compSubtitle: "Gerçek kullanıcı ve donanım verilerine dayalı teknik kıyaslama.",
       colFeature: "Kriter & Özellik",
       colEHelper: "E-Helper (Önerilen)",
       colOfficial: "Resmi Excalibur Control Center",
-      // Features
       featBadge: "Yetkinlikler",
-      featTitle: "İhtiyacınız Olan Her Şey, Tek Parçada",
-      featSubtitle: "Sadece oyuncuların gerçekten kullandığı ve ihtiyaç duyduğu özellikleri en hızlı şekilde yönetin.",
-      // Guide
+      featTitle: "İhtiyacınız Olan Kontroller, Tek Parçada",
+      featSubtitle: "Gereksiz karmaşadan arındırılmış, sadece oyuncuların kullandığı pratik donanım ayarları.",
       guideBadge: "Kolay Başlangıç",
       guideTitle: "3 Adımda Kullanmaya Başlayın",
-      guideSubtitle: "Karmaşık kurulum sihirbazları yok. Tıklayın ve anında çalıştırın.",
-      // Hardware
+      guideSubtitle: "Kurulum gerekmez. İndirin, çalıştırın ve keyfini çıkarın.",
       hwBadge: "Uyumluluk",
       hwTitle: "Desteklenen Casper Excalibur Cihazlar",
       hwSubtitle: "Casper Excalibur anakart denetleyicisi ile doğrudan test edilmiş modeller.",
-      // Changelog
       clBadge: "Sürüm Geçmişi",
       clTitle: "Güncellemeler ve Sürüm Notları",
       clSubtitle: "E-Helper sürekli gelişiyor. Yapılan tüm iyileştirmeleri ve eklenen yenilikleri buradan takip edebilirsiniz.",
@@ -108,14 +103,14 @@ document.addEventListener('DOMContentLoaded', () => {
       statSvcLbl: "Background Overhead",
       statSvcDesc: "Zero CPU drain and zero telemetry",
       statEcVal: "ACPI SMI",
-      statEcLbl: "Direct EC Bridge",
+      statEcLbl: "Hardware Bridge",
       statEcDesc: "G-Helper philosophy native hardware link",
       statLicVal: "GPL-3.0",
       statLicLbl: "Open Source",
       statLicDesc: "Community-driven, completely transparent",
       simBadge: "Interactive Demo",
       simTitle: "Experience E-Helper Live in Browser",
-      simSubtitle: "Click performance modes, RGB lighting presets, and the brightness slider below to see the virtual laptop chassis react in real time.",
+      simSubtitle: "Switch performance modes, RGB lighting presets, and adjust the brightness slider to see the simulated keyboard react instantly.",
       simExplainer: "This simulator mirrors the exact WPF interface of E-Helper and simulates physical motherboard EC fan/RGB responses.",
       simTitleBar: "E-Helper — Casper Excalibur",
       simPowerTitle: "Performance Mode",
@@ -136,27 +131,22 @@ document.addEventListener('DOMContentLoaded', () => {
       chassisHeader: "Casper Excalibur Keyboard & Fan Response",
       gaugeCpuFan: "CPU Fan",
       gaugeGpuFan: "GPU Fan",
-      gaugeAcoustic: "Acoustics / Noise",
-      // Comparison
+      gaugeAcoustic: "Noise Level",
       compBadge: "Why E-Helper?",
       compTitle: "Comparison with Official Control Center",
-      compSubtitle: "E-Helper eliminates all unnecessary background tasks, giving you pure performance.",
+      compSubtitle: "Technical benchmarks based on actual hardware and community data.",
       colFeature: "Criteria & Specs",
       colEHelper: "E-Helper (Recommended)",
       colOfficial: "Official Excalibur Control Center",
-      // Features
       featBadge: "Capabilities",
       featTitle: "Everything You Need, In One Compact Tray",
       featSubtitle: "Manage the exact hardware parameters you care about at blazing speeds.",
-      // Guide
       guideBadge: "Quick Start",
       guideTitle: "Get Started in 3 Simple Steps",
       guideSubtitle: "No bulky install wizards. Download, run, and enjoy.",
-      // Hardware
       hwBadge: "Compatibility",
       hwTitle: "Supported Casper Excalibur Models",
       hwSubtitle: "Tested and verified directly on Casper Excalibur motherboard controllers.",
-      // Changelog
       clBadge: "Release History",
       clTitle: "Changelog & Release Notes",
       clSubtitle: "E-Helper is constantly refined. Track all recent updates and improvements here.",
@@ -169,23 +159,19 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentLang = 'tr';
 
   // -----------------------------------------------------------------
-  // 2. Hardware Simulator State & Engine
+  // 2. Hardware & RGB Simulator State & Animation Engine
   // -----------------------------------------------------------------
   const simState = {
     mode: 'gaming', // office | gaming | highperf
     rgbMode: 'TripleZone', // Static, Breathing, ColorfulCycle, Rainbow, TripleZone
-    brightness: 2, // 0: 0%, 1: 50%, 2: 100%
-    activeZone: 0, // 0: Left, 1: Mid, 2: Right
+    brightness: 2, // 0: Off (%0), 1: Mid (%50), 2: Full (%100)
+    activeZone: 0, // 0: Left (WASD), 1: Center, 2: Right (Numpad)
     zoneColors: ['#00f0ff', '#10b981', '#ef4444'],
     colorPalette: ['#00f0ff', '#10b981', '#ef4444', '#f59e0b', '#8b5cf6', '#ec4899', '#ffffff', '#3b82f6'],
-    cpuTemp: 58,
-    cpuRpm: 2800,
-    gpuTemp: 54,
-    gpuRpm: 2600,
-    ramPct: 44,
-    ramText: '14.1 / 32.0 GB',
-    ssdPct: 61,
-    ssdText: '298 / 476 GB'
+    cpuTemp: 62,
+    cpuRpm: 3150,
+    gpuTemp: 58,
+    gpuRpm: 2950
   };
 
   // DOM Elements - Simulator
@@ -198,14 +184,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const txtCpuRpm = document.getElementById('txtCpuRpm');
   const txtGpuTemp = document.getElementById('txtGpuTemp');
   const txtGpuRpm = document.getElementById('txtGpuRpm');
-
-  const txtRamPercent = document.getElementById('txtRamPercent');
-  const txtRamUsage = document.getElementById('txtRamUsage');
-  const pbRamUsage = document.getElementById('pbRamUsage');
-
-  const txtSsdPercent = document.getElementById('txtSsdPercent');
-  const txtSsdUsage = document.getElementById('txtSsdUsage');
-  const pbSsdUsage = document.getElementById('pbSsdUsage');
 
   const cmbLedMode = document.getElementById('cmbLedMode');
   const btnModeColorAction = document.getElementById('btnModeColorAction');
@@ -231,7 +209,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const readoutMode = document.getElementById('readoutMode');
   const readoutWatts = document.getElementById('readoutWatts');
 
-  // Mode click listeners
+  // -----------------------------------------------------------------
+  // 3. Power Mode Handler
+  // -----------------------------------------------------------------
   function setPowerMode(mode) {
     simState.mode = mode;
     [btnOffice, btnGaming, btnHighPerf].forEach(b => b.classList.remove('active'));
@@ -243,7 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
       readoutWatts.textContent = "35W TDP";
       fanIconCpu.classList.remove('spinning');
       fanIconGpu.classList.remove('spinning');
-      gaugeAcousticReading.textContent = "18 dB (Fısıltı)";
+      gaugeAcousticReading.textContent = currentLang === 'tr' ? "18 dB (Sessiz)" : "18 dB (Silent)";
     } else if (mode === 'gaming') {
       btnGaming.classList.add('active');
       txtPowerModeTitle.textContent = currentLang === 'tr' ? "Performans Modu: Dengeli" : "Power Mode: Balanced";
@@ -253,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
       fanIconGpu.classList.add('spinning');
       fanIconCpu.style.animationDuration = '1.2s';
       fanIconGpu.style.animationDuration = '1.2s';
-      gaugeAcousticReading.textContent = "34 dB (Standart)";
+      gaugeAcousticReading.textContent = currentLang === 'tr' ? "34 dB (Standart)" : "34 dB (Normal)";
     } else if (mode === 'highperf') {
       btnHighPerf.classList.add('active');
       txtPowerModeTitle.textContent = currentLang === 'tr' ? "Performans Modu: Performans" : "Power Mode: Turbo";
@@ -263,7 +243,7 @@ document.addEventListener('DOMContentLoaded', () => {
       fanIconGpu.classList.add('spinning');
       fanIconCpu.style.animationDuration = '0.5s';
       fanIconGpu.style.animationDuration = '0.5s';
-      gaugeAcousticReading.textContent = "48 dB (Yüksek Hız)";
+      gaugeAcousticReading.textContent = currentLang === 'tr' ? "48 dB (Yüksek Devir)" : "48 dB (High Speed)";
     }
 
     updateTelemetryStats(true);
@@ -273,7 +253,6 @@ document.addEventListener('DOMContentLoaded', () => {
   btnGaming.addEventListener('click', () => setPowerMode('gaming'));
   btnHighPerf.addEventListener('click', () => setPowerMode('highperf'));
 
-  // Telemetry fluctuation simulator
   function updateTelemetryStats(immediate = false) {
     let targetCpuTemp, targetCpuRpm, targetGpuTemp, targetGpuRpm;
 
@@ -308,130 +287,198 @@ document.addEventListener('DOMContentLoaded', () => {
     gaugeGpuReading.textContent = `${simState.gpuRpm} RPM • ${simState.gpuTemp}°C`;
   }
 
-  // Periodic subtle fluctuation
   setInterval(() => {
     updateTelemetryStats(false);
   }, 2500);
 
-  // RGB Mode handler
-  function applyRgbVisuals() {
-    const mode = simState.rgbMode;
-    const brightnessAlpha = simState.brightness === 2 ? 1 : (simState.brightness === 1 ? 0.45 : 0);
+  // -----------------------------------------------------------------
+  // 4. Dynamic RGB Keyboard Engine (Breathing, Rainbow, Dynamic Cycle)
+  // -----------------------------------------------------------------
+  let rgbAnimationId = null;
+  let dynamicCycleTimer = null;
+  let animationTime = 0;
 
-    if (mode === 'TripleZone') {
-      pnlTripleZoneDiagram.style.display = 'grid';
-      applyZoneColorsToDeck(brightnessAlpha);
-    } else if (mode === 'Static') {
-      pnlTripleZoneDiagram.style.display = 'none';
-      const singleColor = simState.zoneColors[0];
-      setDeckAllColor(singleColor, brightnessAlpha);
-      brdModeColorIndicator.style.backgroundColor = singleColor;
-    } else if (mode === 'Breathing') {
-      pnlTripleZoneDiagram.style.display = 'none';
-      const singleColor = simState.zoneColors[1] || '#10b981';
-      setDeckAllColor(singleColor, brightnessAlpha);
-      brdModeColorIndicator.style.backgroundColor = singleColor;
-    } else if (mode === 'ColorfulCycle' || mode === 'Rainbow') {
-      pnlTripleZoneDiagram.style.display = 'none';
-      deckZoneLeft.style.color = '#ef4444';
-      deckZoneMid.style.color = '#10b981';
-      deckZoneRight.style.color = '#3b82f6';
-      applyDeckKeyGlow(deckZoneLeft, '#ef4444', brightnessAlpha);
-      applyDeckKeyGlow(deckZoneMid, '#10b981', brightnessAlpha);
-      applyDeckKeyGlow(deckZoneRight, '#3b82f6', brightnessAlpha);
-    }
-  }
-
-  function applyZoneColorsToDeck(alpha) {
-    const c0 = simState.zoneColors[0];
-    const c1 = simState.zoneColors[1];
-    const c2 = simState.zoneColors[2];
-
-    btnZoneLeft.style.backgroundColor = c0 + '33';
-    btnZoneLeft.style.borderColor = c0;
-    btnZoneMid.style.backgroundColor = c1 + '33';
-    btnZoneMid.style.borderColor = c1;
-    btnZoneRight.style.backgroundColor = c2 + '33';
-    btnZoneRight.style.borderColor = c2;
-
-    deckZoneLeft.style.color = c0;
-    deckZoneMid.style.color = c1;
-    deckZoneRight.style.color = c2;
-
-    applyDeckKeyGlow(deckZoneLeft, c0, alpha);
-    applyDeckKeyGlow(deckZoneMid, c1, alpha);
-    applyDeckKeyGlow(deckZoneRight, c2, alpha);
-
-    // Update active swatch indicator
-    brdModeColorIndicator.style.backgroundColor = simState.zoneColors[simState.activeZone];
-  }
-
-  function setDeckAllColor(color, alpha) {
-    [deckZoneLeft, deckZoneMid, deckZoneRight].forEach(zone => {
-      zone.style.color = color;
-      applyDeckKeyGlow(zone, color, alpha);
-    });
-  }
-
-  function applyDeckKeyGlow(deckZone, color, alpha) {
+  // Helper: Apply color & brightness to keys of a deck zone
+  function renderDeckZone(deckZone, color, brightnessLevel, pulseFactor = 1) {
     const keys = deckZone.querySelectorAll('.matrix-key');
     const label = deckZone.querySelector('.deck-zone-color-label');
     if (label) label.textContent = color.toUpperCase();
+    deckZone.style.color = color;
 
-    keys.forEach(k => {
-      if (alpha === 0) {
+    // Brightness levels:
+    // 0: Kapalı (%0) -> dark keys, no glow, opacity 0.25
+    // 1: Orta (%50)  -> subtle soft glow, opacity 0.55 * pulseFactor
+    // 2: Tam (%100)  -> vivid neon glow, opacity 1.0 * pulseFactor
+    if (brightnessLevel === 0) {
+      keys.forEach(k => {
         k.style.boxShadow = 'none';
-        k.style.borderColor = 'rgba(255,255,255,0.06)';
-        k.style.backgroundColor = '#151a24';
-      } else {
-        k.style.boxShadow = `0 0 10px ${color}`;
+        k.style.borderColor = 'var(--sim-key-border)';
+        k.style.backgroundColor = 'var(--sim-key-bg)';
+        k.style.opacity = '0.3';
+      });
+    } else if (brightnessLevel === 1) {
+      const glowAlpha = (0.55 * pulseFactor).toFixed(2);
+      keys.forEach(k => {
+        k.style.boxShadow = `0 0 5px ${color}`;
         k.style.borderColor = color;
-        k.style.backgroundColor = color + '22';
-      }
-    });
+        k.style.backgroundColor = color + '2b';
+        k.style.opacity = glowAlpha;
+      });
+    } else {
+      const glowAlpha = (1.0 * pulseFactor).toFixed(2);
+      keys.forEach(k => {
+        k.style.boxShadow = `0 0 12px ${color}, 0 0 4px ${color}`;
+        k.style.borderColor = color;
+        k.style.backgroundColor = color + '4d';
+        k.style.opacity = glowAlpha;
+      });
+    }
   }
 
+  // Stop active animations when changing modes
+  function stopRgbAnimations() {
+    if (rgbAnimationId) {
+      cancelAnimationFrame(rgbAnimationId);
+      rgbAnimationId = null;
+    }
+    if (dynamicCycleTimer) {
+      clearInterval(dynamicCycleTimer);
+      dynamicCycleTimer = null;
+    }
+  }
+
+  function startRgbMode() {
+    stopRgbAnimations();
+    const mode = simState.rgbMode;
+    const b = simState.brightness;
+
+    // TripleZone panel visibility
+    if (mode === 'TripleZone') {
+      pnlTripleZoneDiagram.style.display = 'grid';
+      btnZoneLeft.style.borderColor = simState.zoneColors[0];
+      btnZoneMid.style.borderColor = simState.zoneColors[1];
+      btnZoneRight.style.borderColor = simState.zoneColors[2];
+      brdModeColorIndicator.style.backgroundColor = simState.zoneColors[simState.activeZone];
+
+      renderDeckZone(deckZoneLeft, simState.zoneColors[0], b);
+      renderDeckZone(deckZoneMid, simState.zoneColors[1], b);
+      renderDeckZone(deckZoneRight, simState.zoneColors[2], b);
+    } else {
+      pnlTripleZoneDiagram.style.display = 'none';
+    }
+
+    if (mode === 'Static') {
+      const color = simState.zoneColors[0];
+      brdModeColorIndicator.style.backgroundColor = color;
+      renderDeckZone(deckZoneLeft, color, b);
+      renderDeckZone(deckZoneMid, color, b);
+      renderDeckZone(deckZoneRight, color, b);
+    } else if (mode === 'Breathing') {
+      // Smooth sine-wave breathing animation
+      const color = simState.zoneColors[0];
+      brdModeColorIndicator.style.backgroundColor = color;
+
+      function breatheStep() {
+        animationTime += 0.04;
+        // Pulse factor oscillates smoothly between 0.15 and 1.0
+        const pulse = 0.15 + 0.85 * (Math.sin(animationTime) + 1) / 2;
+        renderDeckZone(deckZoneLeft, color, b, pulse);
+        renderDeckZone(deckZoneMid, color, b, pulse);
+        renderDeckZone(deckZoneRight, color, b, pulse);
+        rgbAnimationId = requestAnimationFrame(breatheStep);
+      }
+      breatheStep();
+    } else if (mode === 'Rainbow') {
+      // User requested: "gökkuşağında sağdan ve soldan ortaya doğru kayarak renkler değişsin"
+      // Left and Right zones cycle together and flow inward towards Center zone!
+      function rainbowStep() {
+        animationTime += 1.2;
+        const outerHue = (animationTime) % 360;
+        const centerHue = (animationTime + 90) % 360;
+
+        const outerColor = `hsl(${outerHue}, 100%, 55%)`;
+        const centerColor = `hsl(${centerHue}, 100%, 55%)`;
+        brdModeColorIndicator.style.backgroundColor = outerColor;
+
+        renderDeckZone(deckZoneLeft, outerColor, b);
+        renderDeckZone(deckZoneRight, outerColor, b);
+        renderDeckZone(deckZoneMid, centerColor, b);
+
+        rgbAnimationId = requestAnimationFrame(rainbowStep);
+      }
+      rainbowStep();
+    } else if (mode === 'ColorfulCycle') {
+      // User requested: "dinamik döngüde ise üç bölgeli şekilde her bölge random renk alacak şekilde değişsin"
+      function pickRandomVibrantColor(exclude) {
+        const pool = simState.colorPalette.filter(c => c !== exclude && c !== '#ffffff');
+        return pool[Math.floor(Math.random() * pool.length)];
+      }
+
+      function cycleZones() {
+        const c0 = pickRandomVibrantColor(deckZoneLeft.style.color);
+        const c1 = pickRandomVibrantColor(deckZoneMid.style.color);
+        const c2 = pickRandomVibrantColor(deckZoneRight.style.color);
+
+        renderDeckZone(deckZoneLeft, c0, b);
+        renderDeckZone(deckZoneMid, c1, b);
+        renderDeckZone(deckZoneRight, c2, b);
+        brdModeColorIndicator.style.backgroundColor = c0;
+      }
+
+      cycleZones();
+      dynamicCycleTimer = setInterval(cycleZones, 1600);
+    }
+  }
+
+  // Brightness slider change
+  sliderBrightness.addEventListener('input', (e) => {
+    const val = parseInt(e.target.value);
+    simState.brightness = val;
+    txtBrightnessIcon.textContent = val === 0 ? '%0' : (val === 1 ? '%50' : '%100');
+    startRgbMode();
+  });
+
+  // RGB mode selector
   cmbLedMode.addEventListener('change', (e) => {
     simState.rgbMode = e.target.value;
-    applyRgbVisuals();
+    startRgbMode();
   });
 
-  // Cycle color on Color button click
+  // Color button click: cycle colors in active zone
   btnModeColorAction.addEventListener('click', () => {
-    const nextIdx = (simState.colorPalette.indexOf(simState.zoneColors[simState.activeZone]) + 1) % simState.colorPalette.length;
+    const curColor = simState.zoneColors[simState.activeZone];
+    const nextIdx = (simState.colorPalette.indexOf(curColor) + 1) % simState.colorPalette.length;
     const nextColor = simState.colorPalette[nextIdx];
+
     simState.zoneColors[simState.activeZone] = nextColor;
-    applyRgbVisuals();
+    if (simState.rgbMode === 'Static' || simState.rgbMode === 'Breathing') {
+      simState.zoneColors[0] = nextColor;
+    }
+    brdModeColorIndicator.style.backgroundColor = nextColor;
+    startRgbMode();
   });
 
-  // Zone buttons inside Virtual App
+  // Zone tabs inside 3-Zone map
   [btnZoneLeft, btnZoneMid, btnZoneRight].forEach((b, idx) => {
     b.addEventListener('click', () => {
       [btnZoneLeft, btnZoneMid, btnZoneRight].forEach(btn => btn.classList.remove('active'));
       b.classList.add('active');
       simState.activeZone = idx;
-      brdModeColorIndicator.style.backgroundColor = simState.zoneColors[idx];
-      // Switch color smoothly
-      const nextIdx = (simState.colorPalette.indexOf(simState.zoneColors[idx]) + 1) % simState.colorPalette.length;
+
+      // Cycle zone color immediately
+      const curColor = simState.zoneColors[idx];
+      const nextIdx = (simState.colorPalette.indexOf(curColor) + 1) % simState.colorPalette.length;
       simState.zoneColors[idx] = simState.colorPalette[nextIdx];
-      applyRgbVisuals();
+      startRgbMode();
     });
   });
 
-  // Brightness slider
-  sliderBrightness.addEventListener('input', (e) => {
-    const val = parseInt(e.target.value);
-    simState.brightness = val;
-    txtBrightnessIcon.textContent = val === 0 ? '%0' : (val === 1 ? '%50' : '%100');
-    applyRgbVisuals();
-  });
-
-  // Initial Simulator setup
+  // Initialize Simulator
   setPowerMode('gaming');
-  applyRgbVisuals();
+  startRgbMode();
 
   // -----------------------------------------------------------------
-  // 3. Theme Toggle (Dark / Light)
+  // 5. Theme Toggle (Ensuring All Sections Clearly Adapt)
   // -----------------------------------------------------------------
   const themeToggleBtn = document.getElementById('themeToggleBtn');
   const themeIcon = document.getElementById('themeIcon');
@@ -464,6 +511,9 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
       themeToggleBtn.setAttribute('title', 'Açık Temaya Geç');
     }
+
+    // Refresh active RGB mode to sync key borders with theme
+    startRgbMode();
   }
 
   themeToggleBtn.addEventListener('click', () => {
@@ -474,7 +524,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initTheme();
 
   // -----------------------------------------------------------------
-  // 4. Multi-Language Switcher (TR / EN)
+  // 6. Multi-Language Switcher (TR / EN)
   // -----------------------------------------------------------------
   const langToggleBtn = document.getElementById('langToggleBtn');
   const langLabel = document.getElementById('langLabel');
@@ -490,7 +540,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Refresh mode labels inside simulator
     setPowerMode(simState.mode);
   }
 
@@ -500,7 +549,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // -----------------------------------------------------------------
-  // 5. Changelog Tabs Filter
+  // 7. Changelog Filter Tabs
   // -----------------------------------------------------------------
   const changelogTabs = document.querySelectorAll('.tab-btn');
   const timelineEntries = document.querySelectorAll('.timeline-entry');
@@ -511,7 +560,6 @@ document.addEventListener('DOMContentLoaded', () => {
       tab.classList.add('active');
 
       const filter = tab.getAttribute('data-filter');
-
       timelineEntries.forEach(entry => {
         if (filter === 'all') {
           entry.style.display = 'block';
@@ -525,7 +573,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // -----------------------------------------------------------------
-  // 6. Mobile Menu Drawer Toggle
+  // 8. Mobile Menu Toggle
   // -----------------------------------------------------------------
   const mobileMenuBtn = document.getElementById('mobileMenuBtn');
   const siteNav = document.getElementById('siteNav');
@@ -543,7 +591,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // -----------------------------------------------------------------
-  // 7. Active Nav Spy on Scroll
+  // 9. Active Nav Indicator on Scroll
   // -----------------------------------------------------------------
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-link');
@@ -552,7 +600,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const scrollY = window.pageYOffset;
     sections.forEach(current => {
       const sectionHeight = current.offsetHeight;
-      const sectionTop = current.offsetTop - 120;
+      const sectionTop = current.offsetTop - 100;
       const sectionId = current.getAttribute('id');
 
       if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
