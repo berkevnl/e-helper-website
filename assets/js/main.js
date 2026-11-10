@@ -60,6 +60,12 @@ document.addEventListener('DOMContentLoaded', () => {
       simBrightnessLbl: "Parlaklık",
       simSpeedLbl: "Hız",
       simColorBtn: "Renk",
+      simWindowTitle: "E-Helper — Casper Excalibur G770",
+      simSysRes: "Sistem Kaynakları",
+      simUpdateNotice: "İndir: 1.1.1 → 1.2.0",
+      simAppTheme: "Koyu",
+      simAppThemeLight: "Açık",
+      simAppExit: "Çıkış",
       simZoneLeft: "Sol (WASD)",
       simZoneMid: "Orta",
       simZoneRight: "Sağ (Num)",
@@ -298,6 +304,12 @@ document.addEventListener('DOMContentLoaded', () => {
       simBrightnessLbl: "Brightness",
       simSpeedLbl: "Speed",
       simColorBtn: "Color",
+      simWindowTitle: "E-Helper — Casper Excalibur G770",
+      simSysRes: "System Resources",
+      simUpdateNotice: "Download: 1.1.1 → 1.2.0",
+      simAppTheme: "Dark",
+      simAppThemeLight: "Light",
+      simAppExit: "Exit",
       simZoneLeft: "Left (WASD)",
       simZoneMid: "Center",
       simZoneRight: "Right (Num)",
@@ -517,7 +529,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const txtGpuTemp = document.getElementById('txtGpuTemp');
   const txtGpuRpm = document.getElementById('txtGpuRpm');
 
-  const cmbLedMode = document.getElementById('cmbLedMode');
+  const customRgbDropdown = document.getElementById('customRgbDropdown');
+  const customRgbTrigger = document.getElementById('customRgbTrigger');
+  const customRgbMenu = document.getElementById('customRgbMenu');
+  const customRgbActiveLabel = document.getElementById('customRgbActiveLabel');
+  const customRgbActiveIcon = document.getElementById('customRgbActiveIcon');
+
   const btnModeColorAction = document.getElementById('btnModeColorAction');
   const brdModeColorIndicator = document.getElementById('brdModeColorIndicator');
   const sliderBrightness = document.getElementById('sliderBrightness');
@@ -525,8 +542,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const pnlCycleSpeed = document.getElementById('pnlCycleSpeed');
   const txtBrightnessIcon = document.getElementById('txtBrightnessIcon');
   const txtBrightnessLabel = document.getElementById('txtBrightnessLabel');
-  const modeSelectIcon = document.getElementById('modeSelectIcon');
-  const speedCurrentText = document.getElementById('speedCurrentText');
+
+  const btnAppThemeToggle = document.getElementById('btnAppThemeToggle');
+  const txtAppThemeLabel = document.getElementById('txtAppThemeLabel');
+  const btnAppLangToggle = document.getElementById('btnAppLangToggle');
+  const txtAppLangLabel = document.getElementById('txtAppLangLabel');
+  const btnAppExit = document.getElementById('btnAppExit');
+  const appCloseBtn = document.getElementById('appCloseBtn');
 
   // Vector SVG Icons for all 6 RGB Lighting Modes
   const rgbModeIcons = {
@@ -681,23 +703,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Update Speed UI, Notches and Slider
+
+  // Update Slider fill styling for authentic Windows/Fluent appearance
+  function updateSliderFill(slider) {
+    if (!slider) return;
+    const min = parseFloat(slider.min) || 0;
+    const max = parseFloat(slider.max) || 2;
+    const val = parseFloat(slider.value) || 0;
+    const pct = ((val - min) / (max - min)) * 100;
+
+    const curTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+    const activeColor = curTheme === 'light' ? '#0078d4' : '#00f0ff';
+    const inactiveColor = curTheme === 'light' ? '#e2e8f0' : '#263249';
+
+    slider.style.background = `linear-gradient(to right, ${activeColor} 0%, ${activeColor} ${pct}%, ${inactiveColor} ${pct}%, ${inactiveColor} 100%)`;
+  }
+
+  // Update Speed UI & Sliders
   function updateSpeedUI() {
     const s = simState.cycleSpeed;
-    if (sliderCycleSpeed) sliderCycleSpeed.value = s;
-
-    const speedNames = currentLang === 'tr'
-      ? [i18n.tr.speedSlow, i18n.tr.speedMedium, i18n.tr.speedFast]
-      : [i18n.en.speedSlow, i18n.en.speedMedium, i18n.en.speedFast];
-    const speedText = speedNames[s] || speedNames[0];
-
-    if (speedCurrentText) speedCurrentText.textContent = speedText;
-
-    [0, 1, 2].forEach(idx => {
-      const notch = document.getElementById(`notchSpeed${idx}`);
-      if (notch) notch.classList.toggle('active', idx === s);
-    });
-
+    if (sliderCycleSpeed) {
+      sliderCycleSpeed.value = s;
+      updateSliderFill(sliderCycleSpeed);
+    }
     updateBrightnessSpeedUI();
   }
 
@@ -705,6 +733,14 @@ document.addEventListener('DOMContentLoaded', () => {
   function updateBrightnessSpeedUI() {
     const b = simState.brightness;
     const bText = b === 0 ? '%0' : (b === 1 ? '%50' : '%100');
+
+    if (sliderBrightness) {
+      sliderBrightness.value = b;
+      updateSliderFill(sliderBrightness);
+    }
+    if (sliderCycleSpeed) {
+      updateSliderFill(sliderCycleSpeed);
+    }
 
     const hasSpeed = simState.rgbMode === 'Cycle' || simState.rgbMode === 'Rainbow';
     if (hasSpeed) {
@@ -736,27 +772,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const mode = simState.rgbMode;
     const b = simState.brightness;
 
-    // Update active icon badge inside dropdown wrapper
-    if (modeSelectIcon && rgbModeIcons[mode]) {
-      modeSelectIcon.innerHTML = rgbModeIcons[mode];
+    // Update Custom Dropdown trigger label & icon
+    if (customRgbActiveLabel) {
+      const modeKey = 'opt' + mode;
+      customRgbActiveLabel.textContent = i18n[currentLang][modeKey] || mode;
+    }
+    if (customRgbActiveIcon && rgbModeIcons[mode]) {
+      customRgbActiveIcon.innerHTML = rgbModeIcons[mode];
     }
 
-    // Update quick RGB mode pills active state
-    document.querySelectorAll('.rgb-pill-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.mode === mode);
+    // Update Selected class in dropdown menu items
+    document.querySelectorAll('.custom-dropdown-item').forEach(item => {
+      item.classList.toggle('selected', item.dataset.mode === mode);
     });
 
-    // Speed slider panel visibility (visible in Cycle & Rainbow only - matching WPF v1.2.0)
+    // Speed slider panel visibility (visible in Cycle & Rainbow only - matching screenshot!)
     const hasSpeed = mode === 'Cycle' || mode === 'Rainbow';
     if (pnlCycleSpeed) {
       pnlCycleSpeed.style.display = hasSpeed ? 'flex' : 'none';
     }
 
-    // Color trigger action button interactivity (active in Static, Breathing & TripleZone)
+    // Color trigger action button interactivity (disabled/gray in Cycle & Rainbow as in screenshot)
     if (btnModeColorAction) {
       const canPickColor = mode === 'Static' || mode === 'Breathing' || mode === 'TripleZone';
-      btnModeColorAction.style.opacity = canPickColor ? '1' : '0.6';
-      btnModeColorAction.style.pointerEvents = canPickColor ? 'auto' : 'none';
+      btnModeColorAction.classList.toggle('disabled', !canPickColor);
+      if (brdModeColorIndicator) {
+        brdModeColorIndicator.style.display = canPickColor ? 'inline-block' : 'none';
+      }
     }
 
     updateSpeedUI();
@@ -901,49 +943,80 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Brightness slider change (0, 1, 2)
-  sliderBrightness.addEventListener('input', (e) => {
-    const val = parseInt(e.target.value);
-    simState.brightness = val;
-    startRgbMode();
-  });
+  // Brightness slider change
+  if (sliderBrightness) {
+    sliderBrightness.addEventListener('input', (e) => {
+      const val = parseInt(e.target.value);
+      simState.brightness = val;
+      updateSliderFill(sliderBrightness);
+      startRgbMode();
+    });
+  }
 
-  // Speed slider change (0, 1, 2)
+  // Speed slider change (0: Slow, 1: Medium, 2: Fast)
   if (sliderCycleSpeed) {
     sliderCycleSpeed.addEventListener('input', (e) => {
       simState.cycleSpeed = parseInt(e.target.value);
+      updateSliderFill(sliderCycleSpeed);
       updateSpeedUI();
     });
   }
 
-  // Clickable notch buttons for speed (Yavaş, Orta, Hızlı)
-  [0, 1, 2].forEach(idx => {
-    const notch = document.getElementById(`notchSpeed${idx}`);
-    if (notch) {
-      notch.addEventListener('click', () => {
-        simState.cycleSpeed = idx;
-        updateSpeedUI();
-      });
-    }
-  });
+  // Custom Dropdown Toggle & Selection
+  if (customRgbTrigger && customRgbDropdown) {
+    customRgbTrigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = customRgbDropdown.classList.toggle('open');
+      customRgbTrigger.setAttribute('aria-expanded', isOpen);
+    });
 
-  // RGB mode selector dropdown
-  cmbLedMode.addEventListener('change', (e) => {
-    simState.rgbMode = e.target.value;
-    startRgbMode();
-  });
-
-  // RGB mode quick pills buttons
-  document.querySelectorAll('.rgb-pill-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const m = btn.dataset.mode;
-      if (m) {
-        simState.rgbMode = m;
-        cmbLedMode.value = m;
-        startRgbMode();
+    document.addEventListener('click', (e) => {
+      if (!customRgbDropdown.contains(e.target)) {
+        customRgbDropdown.classList.remove('open');
+        customRgbTrigger.setAttribute('aria-expanded', 'false');
       }
     });
-  });
+
+    document.querySelectorAll('.custom-dropdown-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const selectedMode = item.dataset.mode;
+        if (selectedMode) {
+          simState.rgbMode = selectedMode;
+          customRgbDropdown.classList.remove('open');
+          customRgbTrigger.setAttribute('aria-expanded', 'false');
+          startRgbMode();
+        }
+      });
+    });
+  }
+
+  // App Window Footer: Theme Toggle Button
+  if (btnAppThemeToggle) {
+    btnAppThemeToggle.addEventListener('click', () => {
+      const curTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+      setTheme(curTheme === 'dark' ? 'light' : 'dark');
+    });
+  }
+
+  // App Window Footer: Language Toggle Button
+  if (btnAppLangToggle) {
+    btnAppLangToggle.addEventListener('click', () => {
+      const nextLang = currentLang === 'tr' ? 'en' : 'tr';
+      updatePageLanguage(nextLang);
+    });
+  }
+
+  // App Window Footer: Exit Button & Close button (Soft Minimize Feedback)
+  function handleAppExit() {
+    const originalText = txtPowerModeTitle.textContent;
+    txtPowerModeTitle.textContent = currentLang === 'tr' ? "E-Helper sistem tepsisine küçültüldü" : "E-Helper minimized to system tray";
+    setTimeout(() => {
+      setPowerMode(simState.mode);
+    }, 2200);
+  }
+
+  if (btnAppExit) btnAppExit.addEventListener('click', handleAppExit);
+  if (appCloseBtn) appCloseBtn.addEventListener('click', handleAppExit);
 
   // Color button click: cycle colors in active zone
   btnModeColorAction.addEventListener('click', () => {
@@ -1006,13 +1079,17 @@ document.addEventListener('DOMContentLoaded', () => {
         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
       `;
       themeToggleBtn.setAttribute('title', currentLang === 'tr' ? 'Koyu Temaya Geç' : 'Switch to Dark Theme');
+      if (txtAppThemeLabel) txtAppThemeLabel.textContent = i18n[currentLang].simAppTheme;
     } else {
       themeIcon.innerHTML = `
         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
       `;
       themeToggleBtn.setAttribute('title', currentLang === 'tr' ? 'Açık Temaya Geç' : 'Switch to Light Theme');
+      if (txtAppThemeLabel) txtAppThemeLabel.textContent = i18n[currentLang].simAppThemeLight;
     }
 
+    updateSliderFill(sliderBrightness);
+    updateSliderFill(sliderCycleSpeed);
     startRgbMode();
   }
 
@@ -1050,8 +1127,15 @@ document.addEventListener('DOMContentLoaded', () => {
     setPowerMode(simState.mode);
     updateSpeedUI();
 
-    // Update theme button tooltip
+    if (txtAppLangLabel) {
+      txtAppLangLabel.textContent = lang === 'tr' ? 'EN' : 'TR';
+    }
     const curTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+    if (txtAppThemeLabel) {
+      txtAppThemeLabel.textContent = curTheme === 'light' ? i18n[lang].simAppTheme : i18n[lang].simAppThemeLight;
+    }
+
+    // Update theme button tooltip
     themeToggleBtn.setAttribute('title', curTheme === 'light' ?
       (lang === 'tr' ? 'Koyu Temaya Geç' : 'Switch to Dark Theme') :
       (lang === 'tr' ? 'Açık Temaya Geç' : 'Switch to Light Theme')
