@@ -74,13 +74,13 @@
         </button>
 
         <!-- Direct Download Button -->
-        <a href="https://github.com/berkevnl/E-Helper/releases/latest/download/E-Helper.exe" class="btn btn-primary" title="E-Helper.exe Doğrudan İndir">
+        <a href="https://github.com/berkevnl/E-Helper/releases/latest/download/E-Helper-win-x64.zip" class="btn btn-primary" title="E-Helper ZIP Paketi Doğrudan İndir">
           <svg class="icon icon-sm" viewBox="0 0 24 24">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
             <polyline points="7 10 12 15 17 10"></polyline>
             <line x1="12" y1="15" x2="12" y2="3"></line>
           </svg>
-          <span data-i18n="downloadBtn">İndir (v1.1.1)</span>
+          <span data-i18n="downloadBtn">İndir (v1.2.0)</span>
         </a>
 
         <!-- Mobile Menu Toggle Button -->
@@ -112,17 +112,17 @@
         </h1>
 
         <p class="hero-subtitle" data-i18n="heroSubtitle">
-          Üreticinin yüzlerce MB RAM harcayan ağır yazılımına elveda deyin. Arka planda 1-10 MB, aktif ekranda ~40-50 MB bellek kullanımı, sıfır arka plan servisi ve doğrudan donanım yönetimi.
+          Üreticinin yüzlerce MB RAM harcayan ağır yazılımına elveda deyin. Arka planda 5-10 MB, aktif ekranda 30-50 MB bellek kullanımı, sıfır arka plan servisi ve doğrudan donanım yönetimi.
         </p>
 
         <div class="hero-cta-group">
-          <a href="https://github.com/berkevnl/E-Helper/releases/latest/download/E-Helper.exe" class="btn btn-primary btn-lg" id="btnMainDownload">
+          <a href="https://github.com/berkevnl/E-Helper/releases/latest/download/E-Helper-win-x64.zip" class="btn btn-primary btn-lg" id="btnMainDownload">
             <svg class="icon" viewBox="0 0 24 24">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
               <polyline points="7 10 12 15 17 10"></polyline>
               <line x1="12" y1="15" x2="12" y2="3"></line>
             </svg>
-            <span data-i18n="downloadCta">E-Helper.exe İndir (v1.1.1)</span>
+            <span data-i18n="downloadCta">E-Helper-win-x64.zip İndir (v1.2.0)</span>
           </a>
 
           <a href="https://github.com/berkevnl/E-Helper" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-lg">
@@ -138,16 +138,16 @@
             <svg class="icon icon-sm" viewBox="0 0 24 24" style="color: var(--accent-emerald);">
               <polyline points="20 6 9 17 4 12"></polyline>
             </svg>
-            <strong data-i18n="metaReq">Windows 10/11 • Kurulumsuz Tek Dosya (~65 MB) • Taşınabilir</strong>
+            <strong data-i18n="metaReq">Windows 10/11 • Taşınabilir ZIP (~64 MB) / Bağımsız EXE • Kurulumsuz</strong>
           </span>
         </div>
 
         <!-- 4-Column Key Metrics Strip -->
         <div class="stats-strip">
           <div class="stat-item">
-            <div class="stat-value tabular-nums" data-i18n="statRamVal">1-10 MB</div>
+            <div class="stat-value tabular-nums" data-i18n="statRamVal">5-10 MB</div>
             <div class="stat-label" data-i18n="statRamLbl">Arka Plan RAM</div>
-            <div class="stat-desc" data-i18n="statRamDesc">Aktif ekranda ~40-50 MB</div>
+            <div class="stat-desc" data-i18n="statRamDesc">Aktif ekranda 30-50 MB</div>
           </div>
           <div class="stat-item">
             <div class="stat-value tabular-nums green" data-i18n="statSvcVal">0 Servis</div>
@@ -155,9 +155,9 @@
             <div class="stat-desc" data-i18n="statSvcDesc">Sıfır CPU sömürüsü ve telemetri</div>
           </div>
           <div class="stat-item">
-            <div class="stat-value" data-i18n="statEcVal">ACPI SMI</div>
+            <div class="stat-value" data-i18n="statEcVal">ACPI & NVML</div>
             <div class="stat-label" data-i18n="statEcLbl">Donanım Köprüsü</div>
-            <div class="stat-desc" data-i18n="statEcDesc">G-Helper felsefesiyle yerel haberleşme</div>
+            <div class="stat-desc" data-i18n="statEcDesc">Doğrudan SMI ve GPU sürücü köprüsü</div>
           </div>
           <div class="stat-item">
             <div class="stat-value" data-i18n="statLicVal">GPL-3.0</div>
@@ -205,18 +205,24 @@
               </div>
             </div>
 
-            <!-- Mode Selector 3-Tile Grid -->
+            <!-- Mode Selector 3-Tile Grid (Vector Icons Overhaul - No Emojis) -->
             <div class="app-modes-grid">
               <button type="button" class="mode-tile-btn" id="btnOffice">
-                <span class="mode-tile-icon">🚲</span>
+                <span class="mode-tile-icon">
+                  <svg viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10zM2 21c0-3 1.8-5.4 5.1-6 2.4-.5 4.9-2 5.9-3"></path></svg>
+                </span>
                 <span class="mode-tile-label" data-i18n="modeOffice">Tasarruf</span>
               </button>
               <button type="button" class="mode-tile-btn active" id="btnGaming">
-                <span class="mode-tile-icon">🚗</span>
+                <span class="mode-tile-icon">
+                  <svg viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+                </span>
                 <span class="mode-tile-label" data-i18n="modeGaming">Dengeli</span>
               </button>
               <button type="button" class="mode-tile-btn" id="btnHighPerf">
-                <span class="mode-tile-icon">🚀</span>
+                <span class="mode-tile-icon">
+                  <svg viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.4-.5-2-1-3-1.1-2.1-.2-4 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.1.4-2.3 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>
+                </span>
                 <span class="mode-tile-label" data-i18n="modeHighPerf">Performans</span>
               </button>
             </div>
@@ -265,18 +271,19 @@
                 <span data-i18n="simKbdTitle">Laptop Klavyesi</span>
               </div>
               <div class="app-telemetry-pill">
-                <span data-i18n="simBrightnessLbl">Parlaklık:</span> <strong id="txtBrightnessIcon">%100</strong>
+                <span id="txtBrightnessLabel" data-i18n="simBrightnessLbl">Parlaklık:</span> <strong id="txtBrightnessIcon">%100</strong>
               </div>
             </div>
 
             <!-- RGB Dropdown & Color Trigger -->
             <div class="app-select-row">
               <select class="app-select" id="cmbLedMode" aria-label="Klavye Işıklandırma Modu">
-                <option value="TripleZone" data-i18n="optTripleZone">🎨 3-Bölge Özel</option>
-                <option value="Static" data-i18n="optStatic">✨ Sabit Renk</option>
-                <option value="Breathing" data-i18n="optBreathing">💨 Nefes Alma</option>
-                <option value="ColorfulCycle" data-i18n="optColorfulCycle">💫 Dinamik Döngü</option>
-                <option value="Rainbow" data-i18n="optRainbow">🌈 Gökkuşağı</option>
+                <option value="TripleZone" data-i18n="optTripleZone">3-Bölge</option>
+                <option value="Static" data-i18n="optStatic">Sabit</option>
+                <option value="Breathing" data-i18n="optBreathing">Nefes</option>
+                <option value="ColorfulCycle" data-i18n="optColorfulCycle">Dinamik</option>
+                <option value="Cycle" data-i18n="optCycle">Döngü</option>
+                <option value="Rainbow" data-i18n="optRainbow">Gökkuşağı</option>
               </select>
 
               <button type="button" class="app-color-trigger" id="btnModeColorAction" title="Rengi Değiştir">
@@ -289,6 +296,12 @@
             <div class="app-slider-row">
               <span data-i18n="simBrightnessLbl">Parlaklık</span>
               <input type="range" class="app-slider" id="sliderBrightness" min="0" max="2" value="2" step="1" aria-label="Parlaklık Seviyesi">
+            </div>
+
+            <!-- Dynamic Speed Slider (0: Yavaş/Slow, 1: Orta/Medium, 2: Hızlı/Fast - in Cycle & Rainbow) -->
+            <div class="app-slider-row" id="pnlCycleSpeed" style="display: none;">
+              <span data-i18n="simSpeedLbl">Hız</span>
+              <input type="range" class="app-slider" id="sliderCycleSpeed" min="0" max="2" value="0" step="1" aria-label="Animasyon Hızı">
             </div>
 
             <!-- Interactive 3-Zone Map -->
@@ -304,7 +317,7 @@
                 <input type="checkbox" checked disabled>
                 <span data-i18n="simStartupLbl">Başlangıçta Çalıştır</span>
               </label>
-              <span class="app-ver-tag">v1.1.1</span>
+              <span class="app-ver-tag">v1.2.0</span>
             </div>
           </div>
 
@@ -437,13 +450,13 @@
                 <td>
                   <span class="badge-tag-good">
                     <svg class="icon icon-sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span data-i18n="compEhRam">~1 - 10 MB (Arka Planda) / ~40 - 50 MB (Aktif Ekranda)</span>
+                    <span data-i18n="compEhRam">~5 - 10 MB (Tepside / Boşta) / ~30 - 50 MB (Aktif Ekranda)</span>
                   </span>
                 </td>
                 <td>
                   <span class="badge-tag-bad">
                     <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                    <span data-i18n="compOffRam">~180 - 350+ MB (Sürekli Arka Plan)</span>
+                    <span data-i18n="compOffRam">~150 - 350+ MB (Bellek sızıntılarıyla 450 MB+)</span>
                   </span>
                 </td>
               </tr>
@@ -458,7 +471,7 @@
                 <td>
                   <span class="badge-tag-bad">
                     <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                    <span data-i18n="compOffSvc">2 - 4 Adet Sürekli Çalışan Servis</span>
+                    <span data-i18n="compOffSvc">4 - 6 Adet Sürekli Çalışan Servis</span>
                   </span>
                 </td>
               </tr>
@@ -467,13 +480,13 @@
                 <td>
                   <span class="badge-tag-good">
                     <svg class="icon icon-sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span data-i18n="compEhStart">Anında (&lt;0.2 sn), Görev Zamanlayıcısı ile UAC'siz</span>
+                    <span data-i18n="compEhStart">Anında (&lt;100 ms), Görev Zamanlayıcısı ile UAC'siz</span>
                   </span>
                 </td>
                 <td>
                   <span class="badge-tag-bad">
                     <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                    <span data-i18n="compOffStart">10 - 25 sn gecikmeli Windows başlangıcı</span>
+                    <span data-i18n="compOffStart">3 - 6+ sn gecikmeli hantal başlangıç</span>
                   </span>
                 </td>
               </tr>
@@ -497,13 +510,28 @@
                 <td>
                   <span class="badge-tag-good">
                     <svg class="icon icon-sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span data-i18n="compEhSize">~65 MB Tek Dosya (.exe, Kurulumsuz)</span>
+                    <span data-i18n="compEhSize">~64 MB Taşınabilir ZIP (~156 MB Bağımsız EXE)</span>
                   </span>
                 </td>
                 <td>
                   <span class="badge-tag-bad">
                     <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                     <span data-i18n="compOffSize">~200 - 350 MB Setup Yükleyici Paketi</span>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td><strong data-i18n="compRowKbd">Klavye Aydınlatma Denetimi</strong></td>
+                <td>
+                  <span class="badge-tag-good">
+                    <svg class="icon icon-sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <span data-i18n="compEhKbd">3-Bölge Bağımsız Renk, Senkronize Döngü (70 FPS), Soldan Sağa Dalga, 3 Kademeli Hız</span>
+                  </span>
+                </td>
+                <td>
+                  <span class="badge-tag-bad">
+                    <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    <span data-i18n="compOffKbd">Temel üretici modları</span>
                   </span>
                 </td>
               </tr>
@@ -573,9 +601,9 @@
             <div class="feature-icon-wrapper">
               <svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg>
             </div>
-            <h3 data-i18n="featCard2Title">Canlı Sıcaklık & Fan İzleme</h3>
+            <h3 data-i18n="featCard2Title">Canlı Sıcaklık & NVML GPU İzleme</h3>
             <p data-i18n="featCard2Desc">
-              İşlemci ve ekran kartı sıcaklıklarını ve bağımsız fan devirlerini (RPM) sistem tepsisi üzerinden anlık olarak takip edin.
+              İşlemci ve harici ekran kartı sıcaklıklarını doğrudan NVIDIA NVML sürücüsü üzerinden hatasız ve anlık takip edin.
             </p>
           </div>
 
@@ -584,9 +612,9 @@
             <div class="feature-icon-wrapper">
               <svg class="icon icon-lg" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M8 16h8"></path></svg>
             </div>
-            <h3 data-i18n="featCard3Title">3-Bölge RGB Klavye</h3>
+            <h3 data-i18n="featCard3Title">6 RGB Modu & 3 Kademeli Hız</h3>
             <p data-i18n="featCard3Desc">
-              WASD, Orta ve Numpad bölgelerine bağımsız renkler atayın. Sabit, nefes alma, gökkuşağı veya dinamik modları tek tıkla seçin.
+              Sabit, nefes, dinamik, yeni senkronize döngü (70 FPS), soldan sağa gökkuşağı dalgası ve 3-bölge özel modlar arasında tek tıkla geçiş yapın.
             </p>
           </div>
 
@@ -739,14 +767,37 @@
         </div>
 
         <div class="timeline">
-          <!-- v1.1.1 -->
+          <!-- v1.2.0 (Latest Release) -->
           <div class="timeline-entry latest major-ver">
             <div class="timeline-marker"></div>
             <div class="version-card">
               <div class="version-card-header">
                 <div class="version-identity">
-                  <span class="version-tag">v1.1.1</span>
+                  <span class="version-tag">v1.2.0</span>
                   <span class="latest-pill" data-i18n="clLatestPill">En Güncel</span>
+                </div>
+                <span class="version-date" data-i18n="clDate120">10 Kasım 2026</span>
+              </div>
+              <ul class="version-highlights">
+                <li><span class="highlight-bullet">•</span><span data-i18n="cl120_1"><strong>Senkronize Spektrum Döngüsü (Cycle Modu):</strong> Tüm tuşların aynı anda aynı rengi alarak 360° renk spektrumunda ~70 FPS akıcılıkla dolaştığı yeni aydınlatma modu.</span></li>
+                <li><span class="highlight-bullet">•</span><span data-i18n="cl120_2"><strong>Dinamik 3 Kademeli Hız Barı:</strong> Döngü ve Gökkuşağı modlarında Yavaş (~10s), Orta (~2.4s) ve Hızlı (~0.72s) kademeleri ile animasyon hızını anlık kontrol edebilme.</span></li>
+                <li><span class="highlight-bullet">•</span><span data-i18n="cl120_3"><strong>%100 Vektörel İkon & Arayüz Revizyonu:</strong> Emojilerden arındırılmış, modern SVG vektörel ikonlar ve akıcı pencere açılış animasyonları (fade & slide-in).</span></li>
+                <li><span class="highlight-bullet">•</span><span data-i18n="cl120_4"><strong>Doğrudan NVIDIA NVML Sürücü Entegrasyonu:</strong> Harici GPU sıcaklık ve fan devirlerinin doğrudan nvml.dll üzerinden güvenilir şekilde okunması.</span></li>
+                <li><span class="highlight-bullet">•</span><span data-i18n="cl120_5"><strong>Sıkıştırılmış Dağıtım Paketi:</strong> Gömülü .NET 8 çalışma zamanı barındıran ~64 MB hafif ZIP arşivi indirme seçeneği.</span></li>
+              </ul>
+              <a href="https://github.com/berkevnl/E-Helper/releases/tag/v1.2.0" target="_blank" rel="noopener noreferrer" class="version-download-btn">
+                <span data-i18n="clDetailsBtn120">v1.2.0 Sürüm Detayları →</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- v1.1.1 -->
+          <div class="timeline-entry major-ver">
+            <div class="timeline-marker"></div>
+            <div class="version-card">
+              <div class="version-card-header">
+                <div class="version-identity">
+                  <span class="version-tag">v1.1.1</span>
                 </div>
                 <span class="version-date" data-i18n="clDate111">12 Ekim 2026</span>
               </div>
@@ -891,7 +942,7 @@
               <span data-i18n="footerGhRepo">GitHub Deposu</span>
             </a>
             <a href="https://github.com/berkevnl/E-Helper/releases/latest" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="min-height: 36px; padding: 6px 12px; font-size: 0.82rem;">
-              <span data-i18n="footerLatestRelease">Son Sürüm (v1.1.1)</span>
+              <span data-i18n="footerLatestRelease">Son Sürüm (v1.2.0)</span>
             </a>
           </div>
         </div>

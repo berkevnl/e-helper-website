@@ -1,6 +1,7 @@
 /* ===================================================================
    E-Helper Showcase & Portal — Interactive Core Script
    Features: Hardware Simulator, Dynamic 3-Zone RGB Engine, Complete TR/EN i18n, Theme Switcher
+   Version: v1.2.0 (Synchronized Spectrum Cycle, 3-Tier Speed Slider, NVML Telemetry)
    =================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -16,27 +17,27 @@ document.addEventListener('DOMContentLoaded', () => {
       navGuide: "Kullanım",
       navHardware: "Donanım",
       navChangelog: "Sürümler",
-      downloadBtn: "İndir (v1.1.1)",
+      downloadBtn: "İndir (v1.2.0)",
 
       // Hero Section
       heroPill: "Casper Excalibur Dizüstü Bilgisayarlar İçin Özel",
       heroTitle1: "Casper Excalibur Dizüstü Bilgisayarınız İçin",
       heroTitleGrad: "Ultra Hafif Kontrol Merkezi",
-      heroSubtitle: "Üreticinin yüzlerce MB RAM harcayan ağır yazılımına elveda deyin. Arka planda 1-10 MB, aktif ekranda ~40-50 MB bellek kullanımı, sıfır arka plan servisi ve doğrudan donanım yönetimi.",
-      downloadCta: "E-Helper.exe İndir (v1.1.1)",
+      heroSubtitle: "Üreticinin yüzlerce MB RAM harcayan ağır yazılımına elveda deyin. Arka planda 5-10 MB, aktif ekranda 30-50 MB bellek kullanımı, sıfır arka plan servisi ve doğrudan donanım yönetimi.",
+      downloadCta: "E-Helper-win-x64.zip İndir (v1.2.0)",
       githubCta: "GitHub'da İncele",
-      metaReq: "Windows 10/11 • Kurulumsuz Tek Dosya (~65 MB) • Taşınabilir",
+      metaReq: "Windows 10/11 • Taşınabilir ZIP (~64 MB) / Bağımsız EXE • Kurulumsuz",
 
       // Hero Key Metrics Strip
-      statRamVal: "1-10 MB",
+      statRamVal: "5-10 MB",
       statRamLbl: "Arka Plan RAM",
-      statRamDesc: "Aktif ekranda ~40-50 MB",
+      statRamDesc: "Aktif ekranda 30-50 MB",
       statSvcVal: "0 Servis",
       statSvcLbl: "Arka Plan Yükü",
       statSvcDesc: "Sıfır CPU sömürüsü ve telemetri",
-      statEcVal: "ACPI SMI",
+      statEcVal: "ACPI & NVML",
       statEcLbl: "Donanım Köprüsü",
-      statEcDesc: "G-Helper felsefesiyle yerel haberleşme",
+      statEcDesc: "Doğrudan SMI ve GPU sürücü köprüsü",
       statLicVal: "GPL-3.0",
       statLicLbl: "Açık Kaynak",
       statLicDesc: "Topluluk destekli, tam şeffaf",
@@ -57,18 +58,25 @@ document.addEventListener('DOMContentLoaded', () => {
       simSsdTitle: "SSD Disk (C:)",
       simKbdTitle: "Laptop Klavyesi",
       simBrightnessLbl: "Parlaklık",
+      simSpeedLbl: "Hız",
       simColorBtn: "Renk",
       simZoneLeft: "Sol (WASD)",
       simZoneMid: "Orta",
       simZoneRight: "Sağ (Num)",
       simStartupLbl: "Başlangıçta Çalıştır",
 
-      // RGB Dropdown Options
-      optTripleZone: "🎨 3-Bölge Özel",
-      optStatic: "✨ Sabit Renk",
-      optBreathing: "💨 Nefes Alma",
-      optColorfulCycle: "💫 Dinamik Döngü",
-      optRainbow: "🌈 Gökkuşağı",
+      // Speed Slider Notches
+      speedSlow: "Yavaş",
+      speedMedium: "Orta",
+      speedFast: "Hızlı",
+
+      // RGB Dropdown Options (Clean vector text - matching v1.2.0)
+      optTripleZone: "3-Bölge",
+      optStatic: "Sabit",
+      optBreathing: "Nefes",
+      optColorfulCycle: "Dinamik",
+      optCycle: "Döngü",
+      optRainbow: "Gökkuşağı",
 
       // Chassis & Deck Readouts
       chassisHeader: "Casper Excalibur Klavye & Fan Tepkisi",
@@ -101,20 +109,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Comparison Rows
       compRowRam: "RAM Bellek Tüketimi",
-      compEhRam: "~1 - 10 MB (Arka Planda) / ~40 - 50 MB (Aktif Ekranda)",
-      compOffRam: "~180 - 350+ MB (Sürekli Arka Plan)",
+      compEhRam: "~5 - 10 MB (Tepside / Boşta) / ~30 - 50 MB (Aktif Ekranda)",
+      compOffRam: "~150 - 350+ MB (Bellek sızıntılarıyla 450 MB+)",
       compRowSvc: "Arka Plan Windows Servisleri",
       compEhSvc: "0 Servis (Sıfır sistem yükü)",
-      compOffSvc: "2 - 4 Adet Sürekli Çalışan Servis",
+      compOffSvc: "4 - 6 Adet Sürekli Çalışan Servis",
       compRowStart: "Açılış Hızı & UAC Onayı",
-      compEhStart: "Anında (<0.2 sn), Görev Zamanlayıcısı ile UAC'siz",
-      compOffStart: "10 - 25 sn gecikmeli Windows başlangıcı",
+      compEhStart: "Anında (<100 ms), Görev Zamanlayıcısı ile UAC'siz",
+      compOffStart: "3 - 6+ sn gecikmeli hantal başlangıç",
       compRowPersist: "Yeniden Başlatmada Ayar Kalıcılığı",
       compEhPersist: "Tam Kalıcı (EC Firmware Senkronizasyonu)",
       compOffPersist: "Kararsız (Yeniden başlatmada sıfırlanma)",
       compRowSize: "Gerçek Dosya Boyutu",
-      compEhSize: "~65 MB Tek Dosya (.exe, Kurulumsuz)",
+      compEhSize: "~64 MB Taşınabilir ZIP (~156 MB Bağımsız EXE)",
       compOffSize: "~200 - 350 MB Setup Yükleyici Paketi",
+      compRowKbd: "Klavye Aydınlatma Denetimi",
+      compEhKbd: "3-Bölge Bağımsız Renk, Senkronize Döngü (70 FPS), Soldan Sağa Dalga, 3 Kademeli Hız",
+      compOffKbd: "Temel üretici modları",
       compRowPrivacy: "Veri Gizliliği & Telemetri",
       compEhPrivacy: "Sıfır Telemetri (Tamamen yerel & çevrimdışı)",
       compOffPrivacy: "Sürekli Arka Plan Tanılama ve Loglama",
@@ -128,10 +139,10 @@ document.addEventListener('DOMContentLoaded', () => {
       featSubtitle: "Gereksiz karmaşadan arındırılmış, sadece oyuncuların kullandığı pratik donanım ayarları.",
       featCard1Title: "3 Performans Modu",
       featCard1Desc: "Tasarruf, Dengeli ve Performans profilleri arasında tek tıkla geçiş yapın. Windows yerel güç planlarıyla otomatik senkronize çalışır.",
-      featCard2Title: "Canlı Sıcaklık & Fan İzleme",
-      featCard2Desc: "İşlemci ve ekran kartı sıcaklıklarını ve bağımsız fan devirlerini (RPM) sistem tepsisi üzerinden anlık olarak takip edin.",
-      featCard3Title: "3-Bölge RGB Klavye",
-      featCard3Desc: "WASD, Orta ve Numpad bölgelerine bağımsız renkler atayın. Sabit, nefes alma, gökkuşağı veya dinamik modları tek tıkla seçin.",
+      featCard2Title: "Canlı Sıcaklık & NVML GPU İzleme",
+      featCard2Desc: "İşlemci ve harici ekran kartı sıcaklıklarını doğrudan NVIDIA NVML sürücüsü üzerinden hatasız ve anlık takip edin.",
+      featCard3Title: "6 RGB Modu & 3 Kademeli Hız",
+      featCard3Desc: "Sabit, nefes, dinamik, yeni senkronize döngü (70 FPS), soldan sağa gökkuşağı dalgası ve 3-bölge özel modlar arasında tek tıkla geçiş yapın.",
       featCard4Title: "Kalıcı Ayar Korunumu",
       featCard4Desc: "Bilgisayar yeniden başlatıldığında klavye renkleri ve fan modunuz kaybolmaz; anakart EC denetleyicisi ile otomatik eşitlenir.",
       featCard5Title: "UAC'siz Otomatik Başlangıç",
@@ -144,13 +155,13 @@ document.addEventListener('DOMContentLoaded', () => {
       guideTitle: "3 Adımda Kullanmaya Başlayın",
       guideSubtitle: "Kurulum gerekmez. İndirin, çalıştırın ve keyfini çıkarın.",
       step1Badge: "1. İndir",
-      step1Title: "E-Helper.exe'yi Edinin",
-      step1Desc: "Releases sayfasından son sürümü bilgisayarınıza indirin. Herhangi bir kurulum sihirbazı veya ekstra paket gerekmez.",
-      step1Tip: "Sadece ~65 MB tek dosya halinde çalışır.",
+      step1Title: "E-Helper-win-x64.zip Edinin",
+      step1Desc: "Releases sayfasından son sürüm ZIP paketini (~64 MB) indirin. Herhangi bir kurulum sihirbazı veya ekstra paket gerekmez.",
+      step1Tip: "Sıkıştırılmış hafif taşınabilir arşiv olarak çalışır.",
       step2Badge: "2. Çalıştır",
       step2Title: "Yönetici Olarak Açın",
       step2Desc: "Dosyaya sağ tıklayıp \"Yönetici Olarak Çalıştır\" deyin. Excalibur ACPI anakart denetleyicisine erişim için bu izin zorunludur.",
-      step2Tip: "Güvenli ve şeffaf ACPI WMI/SMI erişimi.",
+      step2Tip: "Güvenli ve şeffaf ACPI WMI/SMI ve NVML erişimi.",
       step3Badge: "3. Yönet",
       step3Title: "Sistem Tepsisinden Kontrol Edin",
       step3Desc: "Saatin yanındaki simgeye tıklayarak paneli açın, fan ve RGB ayarlarınızı anında yapın. İsterseniz başlangıca ekleyin.",
@@ -171,12 +182,24 @@ document.addEventListener('DOMContentLoaded', () => {
       tabMajor: "Büyük Sürümler",
       tabPatches: "Hata Düzeltmeleri",
       clLatestPill: "En Güncel",
+
+      // v1.2.0 Changelog
+      clDate120: "10 Kasım 2026",
+      cl120_1: "Senkronize Spektrum Döngüsü (Cycle Modu): Tüm tuşların aynı anda aynı rengi alarak 360° renk spektrumunda ~70 FPS akıcılıkla dolaştığı yeni aydınlatma modu.",
+      cl120_2: "Dinamik 3 Kademeli Hız Barı: Döngü ve Gökkuşağı modlarında Yavaş (~10s), Orta (~2.4s) ve Hızlı (~0.72s) kademeleri ile animasyon hızını anlık ayarlayabilme.",
+      cl120_3: "%100 Vektörel İkon & Arayüz Revizyonu: Emojilerden arındırılmış, modern SVG vektörel ikonlar ve akıcı pencere açılış animasyonları (fade & slide-in).",
+      cl120_4: "Doğrudan NVIDIA NVML Sürücü Entegrasyonu: Harici GPU sıcaklık ve fan devirlerinin doğrudan nvml.dll üzerinden güvenilir şekilde okunması.",
+      cl120_5: "Sıkıştırılmış Dağıtım Paketi: Gömülü .NET 8 çalışma zamanı barındıran ~64 MB hafif ZIP arşivi indirme seçeneği.",
+      clDetailsBtn120: "v1.2.0 Sürüm Detayları →",
+
+      // v1.1.1 Changelog
       clDate111: "12 Ekim 2026",
       cl111_1: "Otomatik Güncelleme: GitHub API üzerinden yeni sürümleri denetleme ve tek tıkla kesintisiz yeniden başlatarak güncelleme.",
       cl111_2: "Yenilenen Alt Çubuk: Daha sade footer arayüzü ve sürüm etiketleri.",
       cl111_3: "Bellek İyileştirmesi: Boşta bellek tüketimi 1-10 MB bandında optimize edildi.",
       clDetailsBtn111: "v1.1.1 Sürüm Detayları →",
 
+      // v1.1.0 Changelog
       clDate110: "12 Ekim 2026",
       cl110_1: "3-Bölge RGB Aydınlatma: Sol (WASD), Orta ve Sağ bölgeler için bağımsız renk ve mod tanımlama.",
       cl110_2: "2D Renk Paleti: Windows 11 tarzı gelişmiş renk seçici ve Hex/RGB desteği.",
@@ -184,11 +207,13 @@ document.addEventListener('DOMContentLoaded', () => {
       cl110_4: "SSD & RAM Telemetrisi: Bellek ve disk kullanımını gösteren canlı paneller.",
       clDetailsBtn110: "v1.1.0 Sürüm Detayları →",
 
+      // v1.0.1 Changelog
       clDate101: "9 Ekim 2026",
       cl101_1: "Başlangıç Yaması: Görev Zamanlayıcısı ile otomatik açılış uyumluluğu artırıldı.",
       cl101_2: "UI Sürüm Etiketi: Sürüm numarası gösterimindeki uyumsuzluk düzeltildi.",
       clDetailsBtn101: "v1.0.1 Sürüm Detayları →",
 
+      // v1.0.0 Changelog
       clDate100: "9 Ekim 2026",
       cl100_1: "İlk Kararlı Sürüm: Casper Excalibur oyuncu bilgisayarları için bağımsız donanım yönetim aracı yayınlandı.",
       cl100_2: "ACPI SMI Köprüsü: Üretici servislerine gerek kalmadan doğrudan anakartla iletişim.",
@@ -211,7 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Footer Section
       footerDesc: "Casper Excalibur dizüstü bilgisayarlar için açık kaynaklı, bağımsız ve ultra hafif kontrol merkezi.",
       footerGhRepo: "GitHub Deposu",
-      footerLatestRelease: "Son Sürüm (v1.1.1)",
+      footerLatestRelease: "Son Sürüm (v1.2.0)",
       footerColLinks: "Bağlantılar",
       footerColCommunity: "Topluluk & Lisans",
       footerLicense: "GPL-3.0 Lisansı",
@@ -230,27 +255,27 @@ document.addEventListener('DOMContentLoaded', () => {
       navGuide: "Guide",
       navHardware: "Hardware",
       navChangelog: "Changelog",
-      downloadBtn: "Download (v1.1.1)",
+      downloadBtn: "Download (v1.2.0)",
 
       // Hero Section
       heroPill: "Tailored for Casper Excalibur Gaming Laptops",
       heroTitle1: "Ultra-Lightweight Control Center for",
       heroTitleGrad: "Casper Excalibur Laptops",
-      heroSubtitle: "Say goodbye to manufacturer bloatware taking hundreds of MBs of RAM. Enjoy 1-10 MB in background, ~40-50 MB on active screen, zero background services, and direct hardware communication.",
-      downloadCta: "Download E-Helper.exe (v1.1.1)",
+      heroSubtitle: "Say goodbye to manufacturer bloatware taking hundreds of MBs of RAM. Enjoy 5-10 MB in background, 30-50 MB on active screen, zero background services, and direct hardware communication.",
+      downloadCta: "Download E-Helper-win-x64.zip (v1.2.0)",
       githubCta: "View on GitHub",
-      metaReq: "Windows 10/11 • Single File (~65 MB) • Portable",
+      metaReq: "Windows 10/11 • Portable ZIP (~64 MB) / Standalone EXE • Zero Install",
 
       // Hero Key Metrics Strip
-      statRamVal: "1-10 MB",
+      statRamVal: "5-10 MB",
       statRamLbl: "Background RAM",
-      statRamDesc: "~40-50 MB on active screen",
+      statRamDesc: "30-50 MB on active screen",
       statSvcVal: "0 Services",
       statSvcLbl: "Background Overhead",
       statSvcDesc: "Zero CPU drain & telemetry",
-      statEcVal: "ACPI SMI",
+      statEcVal: "ACPI & NVML",
       statEcLbl: "Hardware Bridge",
-      statEcDesc: "Native hardware link (G-Helper philosophy)",
+      statEcDesc: "Direct SMI & native GPU driver bridge",
       statLicVal: "GPL-3.0",
       statLicLbl: "Open Source",
       statLicDesc: "Community-driven, transparent",
@@ -271,18 +296,25 @@ document.addEventListener('DOMContentLoaded', () => {
       simSsdTitle: "SSD Storage (C:)",
       simKbdTitle: "Laptop Keyboard",
       simBrightnessLbl: "Brightness",
+      simSpeedLbl: "Speed",
       simColorBtn: "Color",
       simZoneLeft: "Left (WASD)",
       simZoneMid: "Center",
       simZoneRight: "Right (Num)",
       simStartupLbl: "Run on Startup",
 
-      // RGB Dropdown Options
-      optTripleZone: "🎨 3-Zone Custom",
-      optStatic: "✨ Static Color",
-      optBreathing: "💨 Breathing",
-      optColorfulCycle: "💫 Dynamic Cycle",
-      optRainbow: "🌈 Rainbow Wave",
+      // Speed Slider Notches
+      speedSlow: "Slow",
+      speedMedium: "Medium",
+      speedFast: "Fast",
+
+      // RGB Dropdown Options (Clean vector text - matching v1.2.0)
+      optTripleZone: "3-Zone",
+      optStatic: "Static",
+      optBreathing: "Breathing",
+      optColorfulCycle: "Dynamic",
+      optCycle: "Cycle",
+      optRainbow: "Rainbow",
 
       // Chassis & Deck Readouts
       chassisHeader: "Casper Excalibur Keyboard & Fan Response",
@@ -315,20 +347,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Comparison Rows
       compRowRam: "RAM Memory Footprint",
-      compEhRam: "~1 - 10 MB (Background) / ~40 - 50 MB (Active Screen)",
-      compOffRam: "~180 - 350+ MB (Continuous Background)",
+      compEhRam: "~5 - 10 MB (Idle Tray) / ~30 - 50 MB (Active Window)",
+      compOffRam: "~150 - 350+ MB (Often leaks up to 450 MB+)",
       compRowSvc: "Background Windows Services",
       compEhSvc: "0 Services (Zero background load)",
-      compOffSvc: "2 - 4 Persistent Background Services",
+      compOffSvc: "4 - 6 Persistent Background Services",
       compRowStart: "Startup Speed & UAC Prompt",
-      compEhStart: "Instant (<0.2s), via Task Scheduler without UAC",
-      compOffStart: "10 - 25s delayed Windows startup",
+      compEhStart: "Instant (<100 ms), via Task Scheduler without UAC",
+      compOffStart: "3 - 6+ seconds sluggish launch latency",
       compRowPersist: "Settings Persistence on Reboot",
       compEhPersist: "Fully Persistent (EC Firmware Sync)",
       compOffPersist: "Unstable (Frequent resets on reboot)",
       compRowSize: "Actual Binary File Size",
-      compEhSize: "~65 MB Single File (.exe, Standalone)",
+      compEhSize: "~64 MB Portable ZIP (~156 MB Standalone EXE)",
       compOffSize: "~200 - 350 MB Setup Installer Package",
+      compRowKbd: "Keyboard Lighting Control",
+      compEhKbd: "3-Zone Independent Color, Synchronized Cycle (70 FPS), Left-to-Right Wave, 3-Tier Speed",
+      compOffKbd: "Basic OEM lighting presets",
       compRowPrivacy: "Data Privacy & Telemetry",
       compEhPrivacy: "Zero Telemetry (100% offline & local)",
       compOffPrivacy: "Continuous Background Diagnostics & Logging",
@@ -342,10 +377,10 @@ document.addEventListener('DOMContentLoaded', () => {
       featSubtitle: "Free of clutter, focusing strictly on essential hardware tuning gamers need.",
       featCard1Title: "3 Performance Modes",
       featCard1Desc: "Switch between Eco, Balanced, and Turbo profiles with a single click. Syncs automatically with native Windows power plans.",
-      featCard2Title: "Live Temp & Fan Telemetry",
-      featCard2Desc: "Monitor CPU and GPU temperatures and independent fan speeds (RPM) in real time right from your system tray.",
-      featCard3Title: "3-Zone RGB Keyboard",
-      featCard3Desc: "Assign individual colors to WASD, Center, and Numpad zones. Select static, breathing, rainbow, or dynamic modes in one click.",
+      featCard2Title: "Live Temp & NVML GPU Telemetry",
+      featCard2Desc: "Accurately monitor CPU and GPU core temperatures and independent fan speeds directly via native NVIDIA NVML driver interface.",
+      featCard3Title: "6 RGB Modes & 3-Tier Speed Slider",
+      featCard3Desc: "Seamlessly switch between Static, Breathing, Dynamic, Synchronized Cycle (70 FPS), Rainbow wave, and 3-Zone Custom RGB with dynamic speed tuning.",
       featCard4Title: "Persistent Settings Memory",
       featCard4Desc: "Keyboard colors and fan modes persist after system reboots, synchronized directly with motherboard EC controllers.",
       featCard5Title: "UAC-Free Auto Startup",
@@ -358,13 +393,13 @@ document.addEventListener('DOMContentLoaded', () => {
       guideTitle: "Get Started in 3 Simple Steps",
       guideSubtitle: "No installation wizard required. Download, run, and enjoy.",
       step1Badge: "1. Download",
-      step1Title: "Get E-Helper.exe",
-      step1Desc: "Download the latest release binary. No installer wizard or additional dependencies required.",
-      step1Tip: "Runs as a single standalone ~65 MB executable.",
+      step1Title: "Get E-Helper-win-x64.zip",
+      step1Desc: "Download the latest release ZIP package (~64 MB). No installer wizard or additional dependencies required.",
+      step1Tip: "Runs as a compact standalone portable archive.",
       step2Badge: "2. Run",
       step2Title: "Run as Administrator",
-      step2Desc: "Right-click and select \"Run as Administrator\". Required for direct ACPI motherboard and hardware sensor communication.",
-      step2Tip: "Safe and transparent ACPI WMI/SMI interface.",
+      step2Desc: "Right-click and select \"Run as Administrator\". Required for direct ACPI motherboard and NVML sensor communication.",
+      step2Tip: "Safe and transparent ACPI WMI/SMI and NVML interface.",
       step3Badge: "3. Manage",
       step3Title: "Control from System Tray",
       step3Desc: "Click the tray icon near the clock to access performance profiles, fan speeds, and RGB modes on the fly.",
@@ -385,12 +420,24 @@ document.addEventListener('DOMContentLoaded', () => {
       tabMajor: "Major Versions",
       tabPatches: "Bug Fixes",
       clLatestPill: "Latest",
+
+      // v1.2.0 Changelog
+      clDate120: "November 10, 2026",
+      cl120_1: "Synchronized Spectrum Flow (Cycle Mode): Brand-new synchronized 70 FPS lighting mode where all keys seamlessly transition in unison across the 360° color wheel.",
+      cl120_2: "Dynamic 3-Tier Speed Slider: Real-time speed tuning (Slow ~10s, Medium ~2.4s, Fast ~0.72s) for Cycle and Rainbow wave presets.",
+      cl120_3: "100% Vector Icon Overhaul: Zero emojis, crisp SVG system geometries, and fluid window fade & slide-in micro-interactions.",
+      cl120_4: "NVIDIA NVML Driver Integration: Direct, reliable discrete GPU core telemetry and fan RPM readings via nvml.dll.",
+      cl120_5: "Lightweight Distribution Package: Compact ~64 MB portable ZIP package with embedded self-contained .NET 8 runtime.",
+      clDetailsBtn120: "v1.2.0 Release Notes →",
+
+      // v1.1.1 Changelog
       clDate111: "October 12, 2026",
       cl111_1: "Auto-Updater: Checks new GitHub releases and seamlessly self-updates with one click.",
       cl111_2: "Refined Status Bar: Cleaner footer interface and streamlined version tags.",
       cl111_3: "Memory Optimization: Idle RAM footprint optimized to a lean 1-10 MB range.",
       clDetailsBtn111: "v1.1.1 Release Notes →",
 
+      // v1.1.0 Changelog
       clDate110: "October 12, 2026",
       cl110_1: "3-Zone RGB Lighting: Independent color assignment for Left (WASD), Center, and Right zones.",
       cl110_2: "2D Color Canvas: Fluent-style color picker with hex/RGB support.",
@@ -398,11 +445,13 @@ document.addEventListener('DOMContentLoaded', () => {
       cl110_4: "SSD & RAM Telemetry: Real-time hardware utilization readout panels.",
       clDetailsBtn110: "v1.1.0 Release Notes →",
 
+      // v1.0.1 Changelog
       clDate101: "October 9, 2026",
       cl101_1: "Startup Patch: Improved Task Scheduler auto-start reliability.",
       cl101_2: "UI Version Label: Fixed version numbering display inconsistency.",
       clDetailsBtn101: "v1.0.1 Release Notes →",
 
+      // v1.0.0 Changelog
       clDate100: "October 9, 2026",
       cl100_1: "Initial Release: Lightweight standalone hardware manager for Casper Excalibur laptops launched.",
       cl100_2: "ACPI SMI Bridge: Direct motherboard communication without OEM services.",
@@ -425,7 +474,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Footer Section
       footerDesc: "Open-source, independent, ultra-lightweight control center for Casper Excalibur laptops.",
       footerGhRepo: "GitHub Repository",
-      footerLatestRelease: "Latest Release (v1.1.1)",
+      footerLatestRelease: "Latest Release (v1.2.0)",
       footerColLinks: "Quick Links",
       footerColCommunity: "Community & License",
       footerLicense: "GPL-3.0 License",
@@ -441,12 +490,13 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentLang = 'tr';
 
   // -----------------------------------------------------------------
-  // 2. Hardware & RGB Simulator State & Animation Engine
+  // 2. Hardware & RGB Simulator State & Animation Engine (v1.2.0)
   // -----------------------------------------------------------------
   const simState = {
     mode: 'gaming', // office | gaming | highperf
-    rgbMode: 'TripleZone', // Static, Breathing, ColorfulCycle, Rainbow, TripleZone
+    rgbMode: 'TripleZone', // Static, Breathing, ColorfulCycle, Cycle, Rainbow, TripleZone
     brightness: 2, // 0: Off (%0), 1: Mid (%50), 2: Full (%100)
+    cycleSpeed: 0, // 0: Yavaş/Slow, 1: Orta/Medium, 2: Hızlı/Fast
     activeZone: 0, // 0: Left (WASD), 1: Center, 2: Right (Numpad)
     zoneColors: ['#00f0ff', '#10b981', '#ef4444'],
     colorPalette: ['#00f0ff', '#10b981', '#ef4444', '#f59e0b', '#8b5cf6', '#ec4899', '#ffffff', '#3b82f6'],
@@ -471,7 +521,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnModeColorAction = document.getElementById('btnModeColorAction');
   const brdModeColorIndicator = document.getElementById('brdModeColorIndicator');
   const sliderBrightness = document.getElementById('sliderBrightness');
+  const sliderCycleSpeed = document.getElementById('sliderCycleSpeed');
+  const pnlCycleSpeed = document.getElementById('pnlCycleSpeed');
   const txtBrightnessIcon = document.getElementById('txtBrightnessIcon');
+  const txtBrightnessLabel = document.getElementById('txtBrightnessLabel');
 
   const pnlTripleZoneDiagram = document.getElementById('pnlTripleZoneDiagram');
   const btnZoneLeft = document.getElementById('btnZoneLeft');
@@ -574,7 +627,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 2500);
 
   // -----------------------------------------------------------------
-  // 4. Dynamic RGB Keyboard Engine (Breathing, Rainbow, Dynamic Cycle)
+  // 4. Dynamic RGB Keyboard Engine (v1.2.0: Cycle, Rainbow, Breathing, Dynamic)
   // -----------------------------------------------------------------
   let rgbAnimationId = null;
   let dynamicCycleTimer = null;
@@ -616,6 +669,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Update Brightness & Speed Telemetry Header UI
+  function updateBrightnessSpeedUI() {
+    const b = simState.brightness;
+    const bText = b === 0 ? '%0' : (b === 1 ? '%50' : '%100');
+
+    const hasSpeed = simState.rgbMode === 'Cycle' || simState.rgbMode === 'Rainbow';
+    if (hasSpeed) {
+      const speedNames = currentLang === 'tr'
+        ? [i18n.tr.speedSlow, i18n.tr.speedMedium, i18n.tr.speedFast]
+        : [i18n.en.speedSlow, i18n.en.speedMedium, i18n.en.speedFast];
+      const speedName = speedNames[simState.cycleSpeed] || speedNames[0];
+      txtBrightnessIcon.textContent = `${bText} - ${speedName}`;
+    } else {
+      txtBrightnessIcon.textContent = bText;
+    }
+  }
+
   // Stop running animations
   function stopRgbAnimations() {
     if (rgbAnimationId) {
@@ -633,6 +703,21 @@ document.addEventListener('DOMContentLoaded', () => {
     stopRgbAnimations();
     const mode = simState.rgbMode;
     const b = simState.brightness;
+
+    // Speed slider panel visibility (visible in Cycle & Rainbow only - matching WPF v1.2.0)
+    const hasSpeed = mode === 'Cycle' || mode === 'Rainbow';
+    if (pnlCycleSpeed) {
+      pnlCycleSpeed.style.display = hasSpeed ? 'flex' : 'none';
+    }
+
+    // Color trigger action button interactivity (active in Static & Breathing)
+    if (btnModeColorAction) {
+      const canPickColor = mode === 'Static' || mode === 'Breathing' || mode === 'TripleZone';
+      btnModeColorAction.style.opacity = canPickColor ? '1' : '0.6';
+      btnModeColorAction.style.pointerEvents = canPickColor ? 'auto' : 'none';
+    }
+
+    updateBrightnessSpeedUI();
 
     // TripleZone map visibility & indicators
     if (mode === 'TripleZone') {
@@ -686,24 +771,55 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       rgbAnimationId = requestAnimationFrame(breatheStep);
-    } else if (mode === 'Rainbow') {
-      // Wall-clock delta-time rainbow sliding from outer edges into center
+    } else if (mode === 'Cycle') {
+      // v1.2.0: Synchronized Spectrum Flow across all keys at ~70 FPS
+      // All 3 zones take the exact same color progressing through the 360° spectrum in unison
       const startTime = performance.now();
 
-      function rainbowStep(now) {
-        // Steady ~9.0s complete rainbow rotation
-        const outerHue = Math.floor(((now - startTime) / 25) % 360);
-        // Center zone lags by 60deg so colors slide inward from left and right into center
-        const centerHue = (outerHue - 60 + 360) % 360;
+      // Speeds: 0 -> Yavaş (~10s loop), 1 -> Orta (~2.4s loop), 2 -> Hızlı (~0.72s loop)
+      const speedDivisors = [28, 6.7, 2.0];
 
-        const outerColor = `hsl(${outerHue}, 100%, 55%)`;
-        const centerColor = `hsl(${centerHue}, 100%, 55%)`;
-        brdModeColorIndicator.style.backgroundColor = outerColor;
+      function cycleStep(now) {
+        const div = speedDivisors[simState.cycleSpeed] || 28;
+        const hue = Math.floor((now - startTime) / div) % 360;
+        const color = `hsl(${hue}, 100%, 55%)`;
+
+        brdModeColorIndicator.style.backgroundColor = color;
         brdModeColorIndicator.style.opacity = '1';
 
-        renderDeckZone(deckZoneLeft, outerColor, b);
-        renderDeckZone(deckZoneRight, outerColor, b);
-        renderDeckZone(deckZoneMid, centerColor, b);
+        // All 3 zones synchronized simultaneously
+        renderDeckZone(deckZoneLeft, color, b);
+        renderDeckZone(deckZoneMid, color, b);
+        renderDeckZone(deckZoneRight, color, b);
+
+        rgbAnimationId = requestAnimationFrame(cycleStep);
+      }
+
+      rgbAnimationId = requestAnimationFrame(cycleStep);
+    } else if (mode === 'Rainbow') {
+      // v1.2.0: Flowing Rainbow wave from Left to Right (WASD leads, Center, Right follows)
+      const startTime = performance.now();
+      const speedDivisors = [28, 6.7, 2.0];
+
+      function rainbowStep(now) {
+        const div = speedDivisors[simState.cycleSpeed] || 28;
+        const baseHue = Math.floor((now - startTime) / div) % 360;
+
+        // Wave flows Left to Right: Left leads (+100°), Mid (+50°), Right (0°)
+        const leftHue = (baseHue + 100) % 360;
+        const midHue = (baseHue + 50) % 360;
+        const rightHue = baseHue % 360;
+
+        const leftColor = `hsl(${leftHue}, 100%, 55%)`;
+        const midColor = `hsl(${midHue}, 100%, 55%)`;
+        const rightColor = `hsl(${rightHue}, 100%, 55%)`;
+
+        brdModeColorIndicator.style.backgroundColor = leftColor;
+        brdModeColorIndicator.style.opacity = '1';
+
+        renderDeckZone(deckZoneLeft, leftColor, b);
+        renderDeckZone(deckZoneMid, midColor, b);
+        renderDeckZone(deckZoneRight, rightColor, b);
 
         rgbAnimationId = requestAnimationFrame(rainbowStep);
       }
@@ -741,9 +857,17 @@ document.addEventListener('DOMContentLoaded', () => {
   sliderBrightness.addEventListener('input', (e) => {
     const val = parseInt(e.target.value);
     simState.brightness = val;
-    txtBrightnessIcon.textContent = val === 0 ? '%0' : (val === 1 ? '%50' : '%100');
     startRgbMode();
   });
+
+  // Speed slider change (0, 1, 2)
+  if (sliderCycleSpeed) {
+    sliderCycleSpeed.addEventListener('input', (e) => {
+      const val = parseInt(e.target.value);
+      simState.cycleSpeed = val;
+      startRgbMode();
+    });
+  }
 
   // RGB mode selector
   cmbLedMode.addEventListener('change', (e) => {
@@ -844,7 +968,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
       if (i18n[lang] && i18n[lang][key] !== undefined) {
-        // If element is a form option or select
         if (el.tagName === 'OPTION') {
           el.textContent = i18n[lang][key];
         } else {
@@ -855,6 +978,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update dynamic state labels
     setPowerMode(simState.mode);
+    updateBrightnessSpeedUI();
 
     // Update theme button tooltip
     const curTheme = document.documentElement.getAttribute('data-theme') || 'dark';
