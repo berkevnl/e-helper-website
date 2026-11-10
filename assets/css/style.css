@@ -717,7 +717,7 @@ img {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   cursor: pointer;
   color: var(--text-secondary);
   transition: all var(--transition-fast);
@@ -726,30 +726,62 @@ img {
 .mode-tile-btn:hover {
   background: var(--sim-tile-hover);
   border-color: var(--border-medium);
-}
-
-.mode-tile-btn.active {
-  background: rgba(0, 240, 255, 0.12);
-  border-color: var(--accent-cyan);
-  color: var(--accent-cyan);
+  transform: translateY(-1px);
 }
 
 .mode-tile-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 22px;
-  height: 22px;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  transition: all var(--transition-fast);
 }
 
 .mode-tile-icon svg {
   width: 18px;
   height: 18px;
   stroke: currentColor;
-  stroke-width: 2;
+  stroke-width: 2.2;
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
+  display: block;
+}
+
+#btnOffice .mode-tile-icon {
+  color: var(--accent-emerald);
+}
+
+#btnGaming .mode-tile-icon {
+  color: var(--accent-cyan);
+}
+
+#btnHighPerf .mode-tile-icon {
+  color: #f97316;
+}
+
+.mode-tile-btn.active#btnOffice {
+  background: rgba(16, 185, 129, 0.14);
+  border-color: var(--accent-emerald);
+  color: var(--accent-emerald);
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.25);
+}
+
+.mode-tile-btn.active#btnGaming {
+  background: rgba(0, 240, 255, 0.14);
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.25);
+}
+
+.mode-tile-btn.active#btnHighPerf {
+  background: rgba(249, 115, 22, 0.14);
+  border-color: #f97316;
+  color: #f97316;
+  box-shadow: 0 0 12px rgba(249, 115, 22, 0.25);
 }
 
 .mode-tile-label {
@@ -868,6 +900,155 @@ img {
   box-shadow: 0 0 6px var(--accent-cyan-glow);
 }
 
+/* RGB Mode Quick Pills Grid with Vector Icons */
+.app-rgb-pills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.rgb-pill-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 6px 4px;
+  background: var(--sim-tile-bg);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-size: 0.73rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.rgb-pill-btn svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+  flex-shrink: 0;
+}
+
+.rgb-pill-btn:hover {
+  background: var(--sim-tile-hover);
+  border-color: var(--border-medium);
+  color: var(--text-primary);
+}
+
+.rgb-pill-btn.active {
+  background: rgba(0, 240, 255, 0.14);
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  font-weight: 600;
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.2);
+}
+
+/* Select Box with Embedded Vector Icon */
+.select-with-icon-wrapper {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.mode-select-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+  color: var(--accent-cyan);
+  z-index: 2;
+}
+
+.mode-select-icon svg {
+  width: 15px;
+  height: 15px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+.app-select-with-icon {
+  width: 100%;
+  padding-left: 32px !important;
+}
+
+/* Speed Slider Panel & Clickable Notches */
+.app-slider-speed-row {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+  background: var(--sim-tile-bg);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 8px 10px;
+  margin-bottom: 12px;
+}
+
+.speed-slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.speed-label-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-primary);
+}
+
+.speed-current-val {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+}
+
+.slider-notch-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.notch-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  padding: 3px 0;
+  font-size: 0.70rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  text-align: center;
+  transition: all var(--transition-fast);
+}
+
+.notch-btn:hover {
+  background: var(--sim-tile-hover);
+  color: var(--text-primary);
+}
+
+.notch-btn.active {
+  background: rgba(0, 240, 255, 0.16);
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  font-weight: 600;
+}
+
 .app-zone-map {
   display: grid;
   grid-template-columns: 1fr 1.2fr 0.9fr;
@@ -957,16 +1138,75 @@ img {
 [data-theme="light"] .virtual-app-window .mode-tile-btn {
   background: #f8fafc;
   border-color: #cbd5e1;
+  color: #334155;
+}
+
+[data-theme="light"] .virtual-app-window .mode-tile-icon {
+  background: #f1f5f9;
+}
+
+[data-theme="light"] .virtual-app-window .mode-tile-btn.active#btnOffice {
+  background: rgba(16, 185, 129, 0.14);
+  border-color: #10b981;
+  color: #059669 !important;
+}
+
+[data-theme="light"] .virtual-app-window .mode-tile-btn.active#btnGaming {
+  background: rgba(2, 132, 199, 0.14);
+  border-color: #0284c7;
+  color: #0284c7 !important;
+}
+
+[data-theme="light"] .virtual-app-window .mode-tile-btn.active#btnHighPerf {
+  background: rgba(234, 88, 12, 0.14);
+  border-color: #ea580c;
+  color: #ea580c !important;
+}
+
+[data-theme="light"] .virtual-app-window .rgb-pill-btn {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #475569;
+}
+
+[data-theme="light"] .virtual-app-window .rgb-pill-btn:hover {
+  background: #f1f5f9;
   color: #0f172a;
 }
 
-[data-theme="light"] .virtual-app-window .mode-tile-btn.active {
+[data-theme="light"] .virtual-app-window .rgb-pill-btn.active {
   background: rgba(2, 132, 199, 0.12);
   border-color: #0284c7;
   color: #0284c7 !important;
 }
 
-[data-theme="light"] .virtual-app-window .mode-tile-btn.active .mode-tile-label {
+[data-theme="light"] .virtual-app-window .mode-select-icon {
+  color: #0284c7 !important;
+}
+
+[data-theme="light"] .virtual-app-window .app-slider-speed-row {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+[data-theme="light"] .virtual-app-window .speed-current-val {
+  color: #0284c7 !important;
+}
+
+[data-theme="light"] .virtual-app-window .notch-btn {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  color: #475569;
+}
+
+[data-theme="light"] .virtual-app-window .notch-btn:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+[data-theme="light"] .virtual-app-window .notch-btn.active {
+  background: rgba(2, 132, 199, 0.14);
+  border-color: #0284c7;
   color: #0284c7 !important;
 }
 

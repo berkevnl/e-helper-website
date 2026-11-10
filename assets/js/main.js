@@ -525,6 +525,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const pnlCycleSpeed = document.getElementById('pnlCycleSpeed');
   const txtBrightnessIcon = document.getElementById('txtBrightnessIcon');
   const txtBrightnessLabel = document.getElementById('txtBrightnessLabel');
+  const modeSelectIcon = document.getElementById('modeSelectIcon');
+  const speedCurrentText = document.getElementById('speedCurrentText');
+
+  // Vector SVG Icons for all 6 RGB Lighting Modes
+  const rgbModeIcons = {
+    TripleZone: `<svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="5" height="18" rx="1"></rect><rect x="10" y="3" width="5" height="18" rx="1"></rect><rect x="17" y="3" width="5" height="18" rx="1"></rect></svg>`,
+    Static: `<svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>`,
+    Breathing: `<svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h5l2.5-6 4 12 3-8 2 2h3.5"></path></svg>`,
+    ColorfulCycle: `<svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m16 3 5 5-5 5"></path><path d="M4 20v-7a4 4 0 0 1 4-4h13"></path><path d="m8 21-5-5 5-5"></path><path d="M20 4v7a4 4 0 0 1-4 4H3"></path></svg>`,
+    Cycle: `<svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"></path><path d="M16 16h5v5"></path></svg>`,
+    Rainbow: `<svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 17a10 10 0 0 0-20 0"></path><path d="M6 17a6 6 0 0 1 12 0"></path><path d="M10 17a2 2 0 0 1 4 0"></path></svg>`
+  };
 
   const pnlTripleZoneDiagram = document.getElementById('pnlTripleZoneDiagram');
   const btnZoneLeft = document.getElementById('btnZoneLeft');
@@ -669,6 +681,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Update Speed UI, Notches and Slider
+  function updateSpeedUI() {
+    const s = simState.cycleSpeed;
+    if (sliderCycleSpeed) sliderCycleSpeed.value = s;
+
+    const speedNames = currentLang === 'tr'
+      ? [i18n.tr.speedSlow, i18n.tr.speedMedium, i18n.tr.speedFast]
+      : [i18n.en.speedSlow, i18n.en.speedMedium, i18n.en.speedFast];
+    const speedText = speedNames[s] || speedNames[0];
+
+    if (speedCurrentText) speedCurrentText.textContent = speedText;
+
+    [0, 1, 2].forEach(idx => {
+      const notch = document.getElementById(`notchSpeed${idx}`);
+      if (notch) notch.classList.toggle('active', idx === s);
+    });
+
+    updateBrightnessSpeedUI();
+  }
+
   // Update Brightness & Speed Telemetry Header UI
   function updateBrightnessSpeedUI() {
     const b = simState.brightness;
@@ -704,20 +736,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const mode = simState.rgbMode;
     const b = simState.brightness;
 
+    // Update active icon badge inside dropdown wrapper
+    if (modeSelectIcon && rgbModeIcons[mode]) {
+      modeSelectIcon.innerHTML = rgbModeIcons[mode];
+    }
+
+    // Update quick RGB mode pills active state
+    document.querySelectorAll('.rgb-pill-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+
     // Speed slider panel visibility (visible in Cycle & Rainbow only - matching WPF v1.2.0)
     const hasSpeed = mode === 'Cycle' || mode === 'Rainbow';
     if (pnlCycleSpeed) {
       pnlCycleSpeed.style.display = hasSpeed ? 'flex' : 'none';
     }
 
-    // Color trigger action button interactivity (active in Static & Breathing)
+    // Color trigger action button interactivity (active in Static, Breathing & TripleZone)
     if (btnModeColorAction) {
       const canPickColor = mode === 'Static' || mode === 'Breathing' || mode === 'TripleZone';
       btnModeColorAction.style.opacity = canPickColor ? '1' : '0.6';
       btnModeColorAction.style.pointerEvents = canPickColor ? 'auto' : 'none';
     }
 
-    updateBrightnessSpeedUI();
+    updateSpeedUI();
 
     // TripleZone map visibility & indicators
     if (mode === 'TripleZone') {
@@ -747,7 +789,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const color = simState.zoneColors[0];
       brdModeColorIndicator.style.backgroundColor = color;
 
-      const BREATH_CYCLE_MS = 6000; // 6.0 seconds calm meditative period
+      const BREATH_CYCLE_MS = 6000;
       const startTime = performance.now();
 
       function breatheStep(now) {
@@ -758,7 +800,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const wave = 0.5 * (1 + Math.cos(phase));
 
         // Power curve for natural, calm pause in complete darkness
-        // Drops down to complete blackout at the bottom, then slowly rekindles
         let pulse = Math.pow(wave, 2.0);
         if (pulse < 0.02) pulse = 0.0;
 
@@ -772,22 +813,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
       rgbAnimationId = requestAnimationFrame(breatheStep);
     } else if (mode === 'Cycle') {
-      // v1.2.0: Synchronized Spectrum Flow across all keys at ~70 FPS
-      // All 3 zones take the exact same color progressing through the 360° spectrum in unison
-      const startTime = performance.now();
-
-      // Speeds: 0 -> Yavaş (~10s loop), 1 -> Orta (~2.4s loop), 2 -> Hızlı (~0.72s loop)
-      const speedDivisors = [28, 6.7, 2.0];
+      // v1.2.0: Synchronized Spectrum Flow across ALL keys at ~70 FPS
+      // All 3 zones change together at the exact same hue simultaneously!
+      // Speed rates (degrees/second): 0: Slow (36 deg/s = 10s loop), 1: Med (150 deg/s = 2.4s loop), 2: Fast (450 deg/s = 0.8s loop)
+      const speedRates = [36, 150, 450];
+      let lastTime = performance.now();
+      let currentHue = 0;
 
       function cycleStep(now) {
-        const div = speedDivisors[simState.cycleSpeed] || 28;
-        const hue = Math.floor((now - startTime) / div) % 360;
-        const color = `hsl(${hue}, 100%, 55%)`;
+        const dt = Math.min((now - lastTime) / 1000, 0.1);
+        lastTime = now;
+        currentHue = (currentHue + speedRates[simState.cycleSpeed] * dt) % 360;
+
+        const color = `hsl(${Math.round(currentHue)}, 100%, 55%)`;
 
         brdModeColorIndicator.style.backgroundColor = color;
         brdModeColorIndicator.style.opacity = '1';
 
-        // All 3 zones synchronized simultaneously
+        // All 3 zones synchronized simultaneously across the full spectrum
         renderDeckZone(deckZoneLeft, color, b);
         renderDeckZone(deckZoneMid, color, b);
         renderDeckZone(deckZoneRight, color, b);
@@ -797,18 +840,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
       rgbAnimationId = requestAnimationFrame(cycleStep);
     } else if (mode === 'Rainbow') {
-      // v1.2.0: Flowing Rainbow wave from Left to Right (WASD leads, Center, Right follows)
-      const startTime = performance.now();
-      const speedDivisors = [28, 6.7, 2.0];
+      // v1.2.0: Flowing Rainbow wave strictly from Left to Right (WASD leads -> Center -> Numpad follows)
+      const speedRates = [45, 160, 450];
+      let lastTime = performance.now();
+      let currentHue = 0;
 
       function rainbowStep(now) {
-        const div = speedDivisors[simState.cycleSpeed] || 28;
-        const baseHue = Math.floor((now - startTime) / div) % 360;
+        const dt = Math.min((now - lastTime) / 1000, 0.1);
+        lastTime = now;
+        currentHue = (currentHue + speedRates[simState.cycleSpeed] * dt) % 360;
 
-        // Wave flows Left to Right: Left leads (+100°), Mid (+50°), Right (0°)
-        const leftHue = (baseHue + 100) % 360;
-        const midHue = (baseHue + 50) % 360;
-        const rightHue = baseHue % 360;
+        // Wave travels strictly from Left to Right:
+        // Left zone is the leading wave front
+        // Mid zone follows Left with -70 deg lag
+        // Right zone follows Mid with another -70 deg lag (-140 deg total lag)
+        const leftHue = Math.round(currentHue);
+        const midHue = (Math.round(currentHue) - 70 + 360) % 360;
+        const rightHue = (Math.round(currentHue) - 140 + 360) % 360;
 
         const leftColor = `hsl(${leftHue}, 100%, 55%)`;
         const midColor = `hsl(${midHue}, 100%, 55%)`;
@@ -863,16 +911,38 @@ document.addEventListener('DOMContentLoaded', () => {
   // Speed slider change (0, 1, 2)
   if (sliderCycleSpeed) {
     sliderCycleSpeed.addEventListener('input', (e) => {
-      const val = parseInt(e.target.value);
-      simState.cycleSpeed = val;
-      startRgbMode();
+      simState.cycleSpeed = parseInt(e.target.value);
+      updateSpeedUI();
     });
   }
 
-  // RGB mode selector
+  // Clickable notch buttons for speed (Yavaş, Orta, Hızlı)
+  [0, 1, 2].forEach(idx => {
+    const notch = document.getElementById(`notchSpeed${idx}`);
+    if (notch) {
+      notch.addEventListener('click', () => {
+        simState.cycleSpeed = idx;
+        updateSpeedUI();
+      });
+    }
+  });
+
+  // RGB mode selector dropdown
   cmbLedMode.addEventListener('change', (e) => {
     simState.rgbMode = e.target.value;
     startRgbMode();
+  });
+
+  // RGB mode quick pills buttons
+  document.querySelectorAll('.rgb-pill-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const m = btn.dataset.mode;
+      if (m) {
+        simState.rgbMode = m;
+        cmbLedMode.value = m;
+        startRgbMode();
+      }
+    });
   });
 
   // Color button click: cycle colors in active zone
@@ -978,7 +1048,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update dynamic state labels
     setPowerMode(simState.mode);
-    updateBrightnessSpeedUI();
+    updateSpeedUI();
 
     // Update theme button tooltip
     const curTheme = document.documentElement.getAttribute('data-theme') || 'dark';
